@@ -1,0 +1,27 @@
+@import '../../../assets/sass/helpers/_mixins'
+@import '../../../assets/sass/src/_color'
+@import '../../../assets/sass/src/_vars'
+    
+/* Modal */
+.Modal
+	+pf
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	z-index: 99
+	+df
+	+cc
+	&__info
+		min-width: 500px
+		max-width: 550px
+		+pr
+		margin: 0 auto
+		background: $w
+		padding: 30px
+		border-radius: 5px
+		box-shadow: 0 0 22px rgba($b, .1)
+	&__close
+		+pa
+		top: 10px
+		right: 10px

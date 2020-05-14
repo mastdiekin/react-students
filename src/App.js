@@ -1,21 +1,18 @@
 import React from "react";
+import Home from "./components/Home/Home";
+import Students from "./components/containers/Students/Students";
+import Wrapper from "./components/UI/Wrapper/Wrapper";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ height: "100%" }}>
+      <Wrapper>
+        <Switch>
+          <Route path="/students" component={Students} />
+          <Route path="/" exact component={Home} />
+        </Switch>
+      </Wrapper>
     </div>
   );
 }

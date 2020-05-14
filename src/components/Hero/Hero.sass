@@ -1,0 +1,30 @@
+@import '../../assets/sass/helpers/_mixins'
+@import '../../assets/sass/src/_color'
+@import '../../assets/sass/src/_vars'
+@import '../../assets/sass/src/_extends'
+
+/* Hero */
+.Hero
+	padding: 200px 0
+	background: linear-gradient(to right bottom,#f7f5fb 50%,#fff 50%)
+	img
+		max-width: 100%
+	&__title
+		font-size: 5em
+		font-weight: bold
+		line-height: 1em
+		margin-bottom: 20px
+		word-break: break-word
+	&__text
+		font-size: 1.8em
+		font-family: $robo
+		line-height: 1.6em
+		margin-bottom: 20px
+	&__buttons
+		a
+			margin-right: 15px
+			font-size: 1.3em
+			font-weight: 300
+			padding: 18px 30px
+			&:last-of-type
+				margin-right: 0
