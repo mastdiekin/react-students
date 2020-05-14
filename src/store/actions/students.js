@@ -5,3 +5,10 @@ export const initStudents = () => {
     type: actionTypes.INIT_STUDENTS,
   };
 };
+
+export const deleteStudent = (id) => {
+  return {
+    type: actionTypes.DELETE_STUDENT,
+    id,
+  };
+};

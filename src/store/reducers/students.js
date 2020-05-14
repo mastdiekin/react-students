@@ -1,9 +1,9 @@
 import * as actions from "../actions/actionTypes";
 
 const initStore = {
-  students: {
-    sdf: {
-      id: Math.floor(Math.random(24) * 20),
+  students: [
+    {
+      id: "asdasdsa",
       name: "Алексей",
       lname: "Ворошилов",
       year: 1996,
@@ -13,8 +13,8 @@ const initStore = {
       adress: "ул. Мойка, 34 дом 15, Санкт-Петербург, 142346",
       phone: "+380 903 230 32 63",
     },
-    sdf4lk6: {
-      id: Math.floor(Math.random(24) * 20),
+    {
+      id: "aasd546",
       name: "Дмитрий",
       lname: "Донцов",
       year: 1995,
@@ -24,8 +24,8 @@ const initStore = {
       adress: "ул. Новокузнецкая, 40 строение 1, Москва, 115054",
       phone: "+7 999 100 92 23",
     },
-    fgnut: {
-      id: Math.floor(Math.random(24) * 20),
+    {
+      id: "asdasge457",
       name: "Василий",
       lname: "Пепелец",
       year: 1990,
@@ -35,7 +35,7 @@ const initStore = {
       adress: "ул. Тверская, 43, Москва, 3426632",
       phone: "+7 235 548 23 74",
     },
-  },
+  ],
 };
 
 const studentsStore = (state = initStore, action) => {
@@ -43,6 +43,11 @@ const studentsStore = (state = initStore, action) => {
     case actions.INIT_STUDENTS:
       return {
         ...state,
+      };
+    case actions.DELETE_STUDENT:
+      return {
+        ...state,
+        students: state.students.filter((item) => item.id !== action.id),
       };
     default:
       return state;

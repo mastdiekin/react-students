@@ -1,1 +1,1 @@
-export { initStudents } from "../actions/students";
+export { initStudents, deleteStudent } from "../actions/students";

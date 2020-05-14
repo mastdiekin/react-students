@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import classes from "./Student.sass";
 import misc from "../../../../assets/sass/misc.sass";
+import * as actions from "../../../../store/actions";
+import { connect } from "react-redux";
 
 class Student extends Component {
   state = {
@@ -20,7 +22,11 @@ class Student extends Component {
     let buttons = (
       <div className={classes.Student__buttons}>
         <button id={classes.edit} title="Изменить"></button>
-        <button id={classes.detete} title="Удалить"></button>
+        <button
+          id={classes.detete}
+          title="Удалить"
+          onClick={() => this.props.onDelete(this.props.data.id)}
+        ></button>
       </div>
     );
     let expand = this.state.isOpened ? (
@@ -39,13 +45,17 @@ class Student extends Component {
       expand = null;
     }
 
+    if (this.state.isOpened && this.props.type !== "table") {
+      typeClass = [classes.Student__info, classes.active].join(" ");
+    }
+
     return (
       <div className={classes.Student__wrapper}>
         <div className={classes.Student} onClick={() => this.toggleExpand()}>
           <div className={typeClass}>
             <div className={["row", misc.fill].join(" ")}>
               <div className="col-1 d-flex">
-                <div className="id align-self-center">{this.props.id}</div>
+                <div className="id align-self-center">{this.props.data.id}</div>
               </div>
               <div className="col-4 d-flex">
                 <div className={[classes.name, "align-self-center"].join(" ")}>
@@ -83,4 +93,10 @@ class Student extends Component {
   }
 }
 
-export default Student;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDelete: (id) => dispatch(actions.deleteStudent(id)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Student);

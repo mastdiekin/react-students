@@ -6,6 +6,7 @@ import Footer from "../../UI/Footer/Footer";
 import Student from "./Student/Student";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
+import misc from "../../../assets/sass/misc.sass";
 
 class Students extends Component {
   componentDidMount() {
@@ -38,6 +39,21 @@ class Students extends Component {
       />
     );
 
+    let createMapStudents = elementsArray.map((el, index) => {
+      return (
+        <Student
+          key={el.id}
+          id={index}
+          data={this.props.students[el.id]}
+          type="data"
+        />
+      );
+    });
+
+    if (elementsArray.length <= 0) {
+      createMapStudents = <p className={misc.center}>Студенты не найдены</p>;
+    }
+
     return (
       <Aux>
         <Header />
@@ -47,16 +63,7 @@ class Students extends Component {
               <div className="col-12">
                 <div className="Students">
                   {staticStudentsTable}
-                  {elementsArray.map((el, index) => {
-                    return (
-                      <Student
-                        key={el.id}
-                        id={index}
-                        data={this.props.students[el.id]}
-                        type="data"
-                      />
-                    );
-                  })}
+                  {createMapStudents}
                 </div>
               </div>
             </div>
