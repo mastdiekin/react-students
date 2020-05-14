@@ -6,8 +6,15 @@ import Footer from "../../UI/Footer/Footer";
 import Student from "./Student/Student";
 import misc from "../../../assets/sass/misc.sass";
 import classes from "./Student/Student.sass";
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions";
 
 class Students extends Component {
+  componentDidMount() {
+    this.props.onInitStudents();
+    document.title = "Students";
+  }
+
   table = () => (
     <div className={classes.Student}>
       <div className={[classes.Student__info, classes.table].join(" ")}>
@@ -16,7 +23,7 @@ class Students extends Component {
             <div className="id align-self-center">#</div>
           </div>
           <div className="col-4 d-flex">
-            <div className="name align-self-center">
+            <div className={[classes.name, "align-self-center"].join(" ")}>
               <span className="fname">Имя</span>
               <span className="lname">Фамилия</span>
             </div>
@@ -39,6 +46,13 @@ class Students extends Component {
   );
 
   render() {
+    const elementsArray = [];
+    for (let key in this.props.students) {
+      elementsArray.push({
+        id: key,
+      });
+    }
+
     return (
       <Aux>
         <Header />
@@ -48,10 +62,15 @@ class Students extends Component {
               <div className="col-12">
                 <div className="Students">
                   {this.table()}
-                  <Student />
-                  <Student />
-                  <Student />
-                  <Student />
+                  {elementsArray.map((el) => {
+                    return (
+                      <Student
+                        key={el.id}
+                        id={el.id}
+                        data={this.props.students[el.id]}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -63,4 +82,16 @@ class Students extends Component {
   }
 }
 
-export default Students;
+const mapStateToProps = (state) => {
+  return {
+    students: state.students.students,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onInitStudents: () => dispatch(actions.initStudents()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Students);

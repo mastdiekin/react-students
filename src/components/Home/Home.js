@@ -6,6 +6,10 @@ import Footer from "../UI/Footer/Footer";
 import Modal from "../UI/Modal/Modal";
 
 class Home extends Component {
+  componentDidMount() {
+    document.title = "Home";
+  }
+
   render() {
     return (
       <Aux>

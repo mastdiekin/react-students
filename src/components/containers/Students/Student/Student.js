@@ -7,10 +7,8 @@ class Student extends Component {
     <div className={classes.Student__expand}>
       <div className="row">
         <div className="col-12">
-          <div className="adress">
-            ул. Новокузнецкая, 40 строение 1, Москва, 115054
-          </div>
-          <div className="phone">+7 999 100 92 10</div>
+          <div className="adress">{this.props.data.adress}</div>
+          <div className="phone">{this.props.data.phone}</div>
         </div>
       </div>
     </div>
@@ -22,25 +20,31 @@ class Student extends Component {
         <div className={classes.Student__info}>
           <div className={["row", misc.fill].join(" ")}>
             <div className="col-1 d-flex">
-              <div className="id align-self-center">1</div>
+              <div className="id align-self-center">{this.props.data.id}</div>
             </div>
             <div className="col-4 d-flex">
-              <div className="name align-self-center">
-                <span className="fname">Алексей</span>
-                <span className="lname">Ворошилов</span>
+              <div className={[classes.name, "align-self-center"].join(" ")}>
+                <span className="fname">{this.props.data.name}</span>
+                <span className="lname">{this.props.data.lname}</span>
               </div>
             </div>
             <div className="col-1 d-flex">
-              <div className="year align-self-center">1996</div>
+              <div className="year align-self-center">
+                {this.props.data.year}
+              </div>
             </div>
             <div className="col-1 d-flex">
-              <div className="age align-self-center">24</div>
+              <div className="age align-self-center">{this.props.data.age}</div>
             </div>
             <div className="col-4 d-flex">
-              <div className="faculty align-self-center">Журналистики</div>
+              <div className="faculty align-self-center">
+                {this.props.data.faculty}
+              </div>
             </div>
             <div className="col-1 d-flex last">
-              <div className="course align-self-center">5й</div>
+              <div className="course align-self-center">
+                {this.props.data.course}
+              </div>
             </div>
           </div>
           <div className={classes.Student__buttons}>
@@ -48,7 +52,7 @@ class Student extends Component {
             <button id={classes.detete} title="Удалить"></button>
           </div>
         </div>
-        {/* {this.expanded()} */}
+        {this.expanded()}
       </div>
     );
   }
