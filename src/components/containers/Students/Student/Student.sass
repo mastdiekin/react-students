@@ -6,6 +6,8 @@
 .Student
 	&:last-of-type
 		border-bottom: 0
+	&__wrapper
+		+pr
 	&__info
 		cursor: pointer
 		background: lighten($students-brand, 2%)
@@ -36,7 +38,7 @@
 	&__buttons
 		+pa
 		right: -70px
-		top: 50%
+		top: 20px
 		transform: translate(0, -50%)
 		+df
 		button
@@ -64,5 +66,5 @@
 					background-color: shade(red, 10%)
 	&__expand
 		padding: 10px
-		// background: lighten($students-brand, 20%)
+		background: lighten($students-brand, 45%)
 		// color: $w

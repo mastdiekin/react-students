@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Footer.sass";
+import { NavLink } from "react-router-dom";
 
 const footer = () => (
   <footer className={classes.Footer}>
@@ -9,19 +10,19 @@ const footer = () => (
           <nav className={classes.Footer__links}>
             <ul>
               <li>
-                <a href="#">Footer link</a>
+                <NavLink to="/">Footer link</NavLink>
               </li>
               <li>
-                <a href="#">Footer link</a>
+                <NavLink to="/">Footer link</NavLink>
               </li>
               <li>
-                <a href="#">Footer link</a>
+                <NavLink to="/">Footer link</NavLink>
               </li>
               <li>
-                <a href="#">Footer link</a>
+                <NavLink to="/">Footer link</NavLink>
               </li>
               <li>
-                <a href="#">Footer link</a>
+                <NavLink to="/">Footer link</NavLink>
               </li>
             </ul>
           </nav>
