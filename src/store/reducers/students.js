@@ -36,18 +36,26 @@ const initStore = {
       phone: "+7 235 548 23 74",
     },
   ],
+  loading: false,
 };
 
 const studentsStore = (state = initStore, action) => {
   switch (action.type) {
-    case actions.INIT_STUDENTS:
+    case actions.START_STUDENTS:
       return {
         ...state,
+        loading: true,
+      };
+    case actions.SUCCESS_STUDENTS:
+      return {
+        ...state,
+        loading: false,
       };
     case actions.DELETE_STUDENT:
       return {
         ...state,
         students: state.students.filter((item) => item.id !== action.id),
+        loading: false,
       };
     default:
       return state;

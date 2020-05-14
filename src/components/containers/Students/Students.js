@@ -54,6 +54,10 @@ class Students extends Component {
       createMapStudents = <p className={misc.center}>Студенты не найдены</p>;
     }
 
+    if (this.props.loading) {
+      createMapStudents = "Загрузка...";
+    }
+
     return (
       <Aux>
         <Header />
@@ -78,6 +82,7 @@ class Students extends Component {
 const mapStateToProps = (state) => {
   return {
     students: state.students.students,
+    loading: state.students.loading,
   };
 };
 
