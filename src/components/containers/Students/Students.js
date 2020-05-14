@@ -7,6 +7,7 @@ import Student from "./Student/Student";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import misc from "../../../assets/sass/misc.sass";
+import Spinner from "../../UI/Spinner/Spinner";
 
 class Students extends Component {
   componentDidMount() {
@@ -55,7 +56,7 @@ class Students extends Component {
     }
 
     if (this.props.loading) {
-      createMapStudents = "Загрузка...";
+      createMapStudents = <Spinner />;
     }
 
     return (

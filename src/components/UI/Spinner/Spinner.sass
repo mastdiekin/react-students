@@ -1,0 +1,95 @@
+.Spinner
+	height: 50px
+	width: 50px
+	left: 50%
+	transform: translate(-50%, 0)
+	position: absolute
+	border-radius: 50%
+
+	&:after
+		content: ""
+		position: absolute
+		width: 43.5px
+		height: 43.5px
+		left: 0px
+		top: 0px
+		margin: 3.2px
+		background: #fff
+		opacity: 1
+		border-radius: 999px
+
+	.side
+		height: 50px
+		width: 25px
+		position: absolute
+		overflow: hidden
+		top: 0
+
+		> .fill
+			position: absolute
+			width: 50px
+			height: 50px
+			background: #09c
+			border-radius: 999px
+			animation: cssSpinnerRight 2s infinite linear
+
+		&.sp_right
+			left: 25px
+			border-radius: 0px 999px 999px 0px
+
+			> .fill
+				right: 0
+				border-right: 25px solid #fff
+
+		&.sp_left
+			left: 0
+			border-radius: 999px 0px 0px 999px
+
+			> .fill
+				left: 0
+				border-left: 25px solid #fff
+				animation: cssSpinnerLeft 2s infinite linear
+
+@keyframes cssSpinnerRight
+	0%
+		transform: rotate(0deg)
+
+	20%
+		transform: rotate(90deg)
+
+	25%
+		transform: rotate(180deg)
+
+	50%
+		transform: rotate(180deg)
+
+	70%
+		transform: rotate(270deg)
+
+	75%
+		transform: rotate(360deg)
+
+	100%
+		transform: rotate(360deg)
+
+@keyframes cssSpinnerLeft
+	0%
+		transform: rotate(0deg)
+
+	25%
+		transform: rotate(0deg)
+
+	35%
+		transform: rotate(90deg)
+
+	50%
+		transform: rotate(180deg)
+
+	75%
+		transform: rotate(180deg)
+
+	80%
+		transform: rotate(270deg)
+
+	100%
+		transform: rotate(360deg)
