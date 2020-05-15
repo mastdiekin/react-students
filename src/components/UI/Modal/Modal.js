@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import classes from "./Modal.sass";
 import misc from "../../../assets/sass/misc.sass";
-import Aux from "../../hoc/Auxx/Auxx";
 import Backdrop from "../Backdrop/Backdrop";
+import Button from "../Button/Button";
 
 class Modal extends Component {
   shouldComponentUpdate(nextProps, nextState) {
@@ -12,20 +12,28 @@ class Modal extends Component {
     );
   }
 
+  // componentDidMount() {
+  //   console.log(this.props);
+  // }
+
   render() {
-    return (
-      <Aux>
-        <Backdrop />
+    if (this.props.show) {
+      return (
         <div className={classes.Modal}>
+          <Backdrop show={this.props.show} closed={this.props.closed} />
           <div className={classes.Modal__info}>
-            <button
-              className={[classes.Modal__close, misc.btn, misc.close].join(" ")}
-            ></button>
+            <Button
+              btnClass={[classes.Modal__close, misc.btn, misc.close].join(" ")}
+              clicked={this.props.closed}
+              title="Закрыть"
+            ></Button>
             {this.props.children}
           </div>
         </div>
-      </Aux>
-    );
+      );
+    } else {
+      return null;
+    }
   }
 }
 

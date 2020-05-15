@@ -1,11 +1,12 @@
 import React from "react";
 import classes from "./Menu.sass";
+import AddNewStudent from "../../containers/AddNewStudent/AddNewStudent";
 
 const menu = () => (
   <nav className={classes.Menu}>
     <ul>
       <li>
-        <a href="#">Добавить</a>
+        <AddNewStudent />
       </li>
       <li>
         <a href="#">Вход</a>

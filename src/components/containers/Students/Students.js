@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import misc from "../../../assets/sass/misc.sass";
 import Spinner from "../../UI/Spinner/Spinner";
+import Modal from "../../UI/Modal/Modal";
+import Input from "../../UI/Input/Input";
 
 class Students extends Component {
   componentDidMount() {

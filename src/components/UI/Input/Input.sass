@@ -1,0 +1,15 @@
+@import '../../../assets/sass/src/_base'
+@import '../../../assets/sass/src/_extends'
+    
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+textarea
+	@extend %input
+
+textarea
+	resize: none
+	min-height: 150px
+	line-height: 20px
+	padding-top: 10px
