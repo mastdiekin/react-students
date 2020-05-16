@@ -21,6 +21,14 @@ export const successStudents = () => {
   };
 };
 
+export const sortStudents = (by, blockType) => {
+  return {
+    type: actionTypes.SORT_STUDENTS,
+    by,
+    blockType,
+  };
+};
+
 //newStudent start
 export const newStudentStart = () => {
   return {

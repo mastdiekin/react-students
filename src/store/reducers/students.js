@@ -1,9 +1,10 @@
 import * as actions from "../actions/actionTypes";
+import { sortBy, orderBy } from "lodash";
 
 const initStore = {
   students: [
     {
-      id: "asdasdsa",
+      id: "z",
       name: "Алексей",
       lname: "Ворошилов",
       year: 1996,
@@ -14,7 +15,7 @@ const initStore = {
       phone: "+380 903 230 32 63",
     },
     {
-      id: "aasd546",
+      id: "f",
       name: "Дмитрий",
       lname: "Донцов",
       year: 1995,
@@ -25,7 +26,7 @@ const initStore = {
       phone: "+7 999 100 92 23",
     },
     {
-      id: "asdasge457",
+      id: "n",
       name: "Василий",
       lname: "Пепелец",
       year: 1990,
@@ -54,6 +55,20 @@ const studentsStore = (state = initStore, action) => {
         loading: false,
         error: false,
       };
+    case actions.SORT_STUDENTS:
+      if (action.blockType !== "table") {
+        return {
+          ...state,
+        };
+      } else {
+        // console.log(state.students, action.by);
+        return {
+          ...state,
+          students: orderBy(state.students, action.by),
+          loading: false,
+          error: false,
+        };
+      }
     case actions.ADD_STUDENT_START:
       return {
         ...state,

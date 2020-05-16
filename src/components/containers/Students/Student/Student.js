@@ -17,6 +17,16 @@ class Student extends Component {
     }));
   }
 
+  // sortTable = (by) => {
+  //   if (this.props.type !== "table") {
+  //     return false;
+  //   }
+
+  //   sortBy()
+
+  //   console.log(by, this.props.students);
+  // };
+
   render() {
     let typeClass = classes.Student__info;
     let buttons = (
@@ -54,31 +64,55 @@ class Student extends Component {
         <div className={classes.Student} onClick={() => this.toggleExpand()}>
           <div className={typeClass}>
             <div className={["row", misc.fill].join(" ")}>
-              <div className="col-1 d-flex">
+              <div
+                className="col-1 d-flex"
+                onClick={() => this.props.onSortTable("id", this.props.type)}
+              >
                 <div className="id align-self-center">{this.props.data.id}</div>
               </div>
-              <div className="col-4 d-flex">
+              <div
+                className="col-4 d-flex"
+                onClick={() => this.props.onSortTable("lname", this.props.type)}
+              >
                 <div className={[classes.name, "align-self-center"].join(" ")}>
                   <span className="fname">{this.props.data.name}</span>
                   <span className="lname">{this.props.data.lname}</span>
                 </div>
               </div>
-              <div className="col-1 d-flex">
+              <div
+                className="col-1 d-flex"
+                onClick={() => this.props.onSortTable("year", this.props.type)}
+              >
                 <div className="year align-self-center">
                   {this.props.data.year}
                 </div>
               </div>
-              <div className="col-4 d-flex">
+              <div
+                className="col-4 d-flex"
+                onClick={() =>
+                  this.props.onSortTable("faculty", this.props.type)
+                }
+              >
                 <div className="faculty align-self-center">
                   {this.props.data.faculty}
                 </div>
               </div>
-              <div className="col-1 d-flex">
+              <div
+                className="col-1 d-flex"
+                onClick={() =>
+                  this.props.onSortTable("dateReceipt", this.props.type)
+                }
+              >
                 <div className="dateReceipt align-self-center">
                   {this.props.data.dateReceipt}
                 </div>
               </div>
-              <div className={["col-1", "d-flex", classes.last].join(" ")}>
+              <div
+                className={["col-1", "d-flex", classes.last].join(" ")}
+                onClick={() =>
+                  this.props.onSortTable("course", this.props.type)
+                }
+              >
                 <div className="course align-self-center">
                   {this.props.data.course}
                 </div>
@@ -96,6 +130,8 @@ class Student extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     onDelete: (id) => dispatch(actions.deleteStudent(id)),
+    onSortTable: (by, blockType) =>
+      dispatch(actions.sortStudents(by, blockType)),
   };
 };
 
