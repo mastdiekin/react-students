@@ -7,6 +7,7 @@ import Footer from "../../../components/UI/Footer/Footer";
 import Main from "../../../components/UI/Main/Main";
 import Input from "../../../components/UI/Input/Input";
 import Button from "../../../components/UI/Button/Button";
+import classes from "./Auth.sass";
 
 const form = (
   <form>
@@ -32,7 +33,7 @@ const Auth = (props) => {
           <div className="container">
             <div className="row">
               <div className="col-12">
-                <div className="Students">{form}</div>
+                <div className={classes.Auth}>{form}</div>
               </div>
             </div>
           </div>

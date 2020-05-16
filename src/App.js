@@ -21,6 +21,7 @@ const App = (props) => {
 function MSwitch() {
   let location = useLocation();
   let background = location.state && location.state.background;
+  console.log(location);
   return (
     <Aux>
       <Switch location={background || location}>
