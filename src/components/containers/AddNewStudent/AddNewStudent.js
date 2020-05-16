@@ -137,7 +137,7 @@ class AddNewStudent extends Component {
         touched: false,
       },
     },
-    show: true,
+    show: false,
   };
 
   onChangeInput = (event, id) => {
