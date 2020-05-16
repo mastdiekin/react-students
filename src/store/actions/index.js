@@ -3,4 +3,5 @@ export {
   deleteStudent,
   startStudents,
   newStudent,
+  newStudentError,
 } from "../actions/students";

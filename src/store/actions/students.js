@@ -33,6 +33,7 @@ export const newStudent = (newstudent) => {
     dispatch(newStudentStart());
     setTimeout(() => {
       dispatch(newStudentSuccess(newstudent));
+      //axios, newStudentError...
     }, 500);
   };
 };
@@ -41,6 +42,13 @@ export const newStudentSuccess = (newstudent) => {
   return {
     type: actionTypes.ADD_STUDENT_SUCCESS,
     newstudent,
+  };
+};
+
+export const newStudentError = (error) => {
+  return {
+    type: actionTypes.ADD_STUDENT_ERROR,
+    error,
   };
 };
 //newStudent end

@@ -16,7 +16,11 @@ class Modal extends Component {
     if (this.props.show) {
       return (
         <div className={classes.Modal}>
-          <Backdrop show={this.props.show} closed={this.props.closed} />
+          <Backdrop
+            show={this.props.show}
+            returnBack={this.props.back}
+            closed={this.props.closed}
+          />
           <div className={classes.Modal__info}>
             <Button
               btnClass={[classes.Modal__close, misc.btn, misc.close].join(" ")}

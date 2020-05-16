@@ -37,6 +37,7 @@ const initStore = {
     },
   ],
   loading: false,
+  error: false,
 };
 
 const studentsStore = (state = initStore, action) => {
@@ -45,17 +46,20 @@ const studentsStore = (state = initStore, action) => {
       return {
         ...state,
         loading: true,
+        error: false,
       };
     case actions.SUCCESS_STUDENTS:
       return {
         ...state,
         loading: false,
+        error: false,
       };
     case actions.ADD_STUDENT_START:
       return {
         ...state,
         loading: true,
         closeModal: true,
+        error: false,
       };
     case actions.ADD_STUDENT_SUCCESS:
       return {
@@ -63,12 +67,20 @@ const studentsStore = (state = initStore, action) => {
         students: state.students.concat(action.newstudent),
         loading: false,
         closeModal: false,
+        error: false,
+      };
+    case actions.ADD_STUDENT_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: true,
       };
     case actions.DELETE_STUDENT:
       return {
         ...state,
         students: state.students.filter((item) => item.id !== action.id),
         loading: false,
+        error: false,
       };
     default:
       return state;
