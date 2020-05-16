@@ -51,6 +51,19 @@ const studentsStore = (state = initStore, action) => {
         ...state,
         loading: false,
       };
+    case actions.ADD_STUDENT_START:
+      return {
+        ...state,
+        loading: true,
+        closeModal: true,
+      };
+    case actions.ADD_STUDENT_SUCCESS:
+      return {
+        ...state,
+        students: state.students.concat(action.newstudent),
+        loading: false,
+        closeModal: false,
+      };
     case actions.DELETE_STUDENT:
       return {
         ...state,

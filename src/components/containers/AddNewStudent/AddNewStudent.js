@@ -5,6 +5,8 @@ import Button from "../../UI/Button/Button";
 import Aux from "../../hoc/Auxx/Auxx";
 import misc from "../../../assets/sass/misc.sass";
 import { checkValid } from "../../hoc/shared/utility";
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions";
 
 class AddNewStudent extends Component {
   toggle = (e) => {
@@ -24,20 +26,20 @@ class AddNewStudent extends Component {
 
   state = {
     form: {
-      lName: {
-        type: "input",
-        format: "text",
-        placeholder: "Фамилия",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 3,
-        },
-        valid: false,
-        touched: false,
-      },
+      // lName: {
+      //   type: "input",
+      //   format: "text",
+      //   placeholder: "Фамилия",
+      //   value: "",
+      //   class: "",
+      //   required: true,
+      //   validation: {
+      //     required: true,
+      //     minLength: 3,
+      //   },
+      //   valid: false,
+      //   touched: false,
+      // },
       name: {
         type: "input",
         format: "text",
@@ -52,93 +54,105 @@ class AddNewStudent extends Component {
         valid: false,
         touched: false,
       },
-      dateB: {
-        type: "input",
-        format: "text",
-        placeholder: "Дата рождения",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 1,
-        },
-        valid: false,
-        touched: false,
-      },
-      faculty: {
-        type: "input",
-        format: "text",
-        placeholder: "Факультет",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 3,
-        },
-        valid: false,
-        touched: false,
-      },
-      date: {
-        type: "input",
-        format: "text",
-        placeholder: "Дата поступления",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 1,
-        },
-        valid: false,
-        touched: false,
-      },
-      course: {
-        type: "input",
-        format: "text",
-        placeholder: "Курс",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 1,
-        },
-        valid: false,
-        touched: false,
-      },
-      adress: {
-        type: "textarea",
-        format: "text",
-        placeholder: "Адрес",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 6,
-        },
-        valid: false,
-        touched: false,
-      },
-      phone: {
-        type: "input",
-        format: "text",
-        placeholder: "Телефон",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 6,
-        },
-        valid: false,
-        touched: false,
-      },
+      // dateB: {
+      //   type: "input",
+      //   format: "text",
+      //   placeholder: "Дата рождения",
+      //   value: "",
+      //   class: "",
+      //   required: true,
+      //   validation: {
+      //     required: true,
+      //     minLength: 1,
+      //   },
+      //   valid: false,
+      //   touched: false,
+      // },
+      // faculty: {
+      //   type: "input",
+      //   format: "text",
+      //   placeholder: "Факультет",
+      //   value: "",
+      //   class: "",
+      //   required: true,
+      //   validation: {
+      //     required: true,
+      //     minLength: 3,
+      //   },
+      //   valid: false,
+      //   touched: false,
+      // },
+      // date: {
+      //   type: "input",
+      //   format: "text",
+      //   placeholder: "Дата поступления",
+      //   value: "",
+      //   class: "",
+      //   required: true,
+      //   validation: {
+      //     required: true,
+      //     minLength: 1,
+      //   },
+      //   valid: false,
+      //   touched: false,
+      // },
+      // course: {
+      //   type: "input",
+      //   format: "text",
+      //   placeholder: "Курс",
+      //   value: "",
+      //   class: "",
+      //   required: true,
+      //   validation: {
+      //     required: true,
+      //     minLength: 1,
+      //   },
+      //   valid: false,
+      //   touched: false,
+      // },
+      // adress: {
+      //   type: "textarea",
+      //   format: "text",
+      //   placeholder: "Адрес",
+      //   value: "",
+      //   class: "",
+      //   required: true,
+      //   validation: {
+      //     required: true,
+      //     minLength: 6,
+      //   },
+      //   valid: false,
+      //   touched: false,
+      // },
+      // phone: {
+      //   type: "input",
+      //   format: "text",
+      //   placeholder: "Телефон",
+      //   value: "",
+      //   class: "",
+      //   required: true,
+      //   validation: {
+      //     required: true,
+      //     minLength: 6,
+      //   },
+      //   valid: false,
+      //   touched: false,
+      // },
     },
     show: false,
   };
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.closeModal) {
+  //     this.setState({ show: false });
+  //   }
+  // }
+
+  componentDidUpdate(nextProps) {
+    if (nextProps.closeModal) {
+      this.setState({ show: false });
+    }
+  }
 
   onChangeInput = (event, id) => {
     const updatedControls = {
@@ -151,6 +165,17 @@ class AddNewStudent extends Component {
       },
     };
     this.setState({ form: updatedControls });
+  };
+
+  submitForm = (e) => {
+    e.preventDefault();
+    const formData = {};
+
+    for (let el in this.state.form) {
+      formData[el] = this.state.form[el].value;
+    }
+
+    this.props.onAddNewStudent(formData);
   };
 
   render() {
@@ -166,7 +191,7 @@ class AddNewStudent extends Component {
     if (this.state.show) {
       isShowModal = (
         <Modal show={() => this.toggle()} closed={() => this.close()}>
-          <form>
+          <form onSubmit={this.submitForm}>
             {formElementsArray.map((el) => (
               <Input
                 key={el.id}
@@ -204,4 +229,18 @@ class AddNewStudent extends Component {
   }
 }
 
-export default AddNewStudent;
+const mapStateToProps = (state) => {
+  return {
+    students: state.students.students,
+    loading: state.students.loading,
+    closeModal: state.students.closeModal,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddNewStudent: (data) => dispatch(actions.newStudent(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewStudent);

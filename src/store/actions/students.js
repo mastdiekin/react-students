@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 
-export const initStudents = (dispatch) => {
+export const initStudents = () => {
   return (dispatch) => {
     dispatch(startStudents());
     setTimeout(() => {
@@ -20,6 +20,30 @@ export const successStudents = () => {
     type: actionTypes.SUCCESS_STUDENTS,
   };
 };
+
+//newStudent start
+export const newStudentStart = () => {
+  return {
+    type: actionTypes.ADD_STUDENT_START,
+  };
+};
+
+export const newStudent = (newstudent) => {
+  return (dispatch) => {
+    dispatch(newStudentStart());
+    setTimeout(() => {
+      dispatch(newStudentSuccess(newstudent));
+    }, 500);
+  };
+};
+
+export const newStudentSuccess = (newstudent) => {
+  return {
+    type: actionTypes.ADD_STUDENT_SUCCESS,
+    newstudent,
+  };
+};
+//newStudent end
 
 export const deleteStudent = (id) => {
   return {
