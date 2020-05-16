@@ -19,29 +19,25 @@ const form = (
 
 const Auth = (props) => {
   let history = useHistory();
-  if (props.showModal) {
-    return (
-      <Modal show={props.showModal} back={history}>
-        {form}
-      </Modal>
-    );
-  } else {
-    return (
-      <Aux>
-        <Header />
-        <Main>
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <div className={classes.Auth}>{form}</div>
-              </div>
+  return props.showModal ? (
+    <Modal show={props.showModal} back={history}>
+      {form}
+    </Modal>
+  ) : (
+    <Aux>
+      <Header />
+      <Main>
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className={classes.Auth}>{form}</div>
             </div>
           </div>
-        </Main>
-        <Footer />
-      </Aux>
-    );
-  }
+        </div>
+      </Main>
+      <Footer />
+    </Aux>
+  );
 };
 
 export default Auth;
