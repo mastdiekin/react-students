@@ -1,3 +1,14 @@
+@import '../../../assets/sass/helpers/_mixins'
+@import '../../../assets/sass/src/_color'
+@import '../../../assets/sass/src/_vars'
+
+.Button
+    &:disabled
+        background: #cccccc
+    &:hover
+        &:disabled
+            color: $w
+    
 .Success
     color: #5C9210
 

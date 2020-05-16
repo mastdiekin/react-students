@@ -34,7 +34,7 @@ class Students extends Component {
           name: "Имя",
           lname: "Фамилия",
           year: "Год",
-          age: "Возраст",
+          dateReceipt: "Дата поступл.",
           faculty: "Факультет",
           course: "Курс",
         }}

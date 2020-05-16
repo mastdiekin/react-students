@@ -68,14 +68,14 @@ class Student extends Component {
                   {this.props.data.year}
                 </div>
               </div>
-              <div className="col-1 d-flex">
-                <div className="age align-self-center">
-                  {this.props.data.age}
-                </div>
-              </div>
               <div className="col-4 d-flex">
                 <div className="faculty align-self-center">
                   {this.props.data.faculty}
+                </div>
+              </div>
+              <div className="col-1 d-flex">
+                <div className="dateReceipt align-self-center">
+                  {this.props.data.dateReceipt}
                 </div>
               </div>
               <div className={["col-1", "d-flex", classes.last].join(" ")}>

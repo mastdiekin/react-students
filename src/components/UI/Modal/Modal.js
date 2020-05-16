@@ -12,10 +12,6 @@ class Modal extends Component {
     );
   }
 
-  // componentDidMount() {
-  //   console.log(this.props);
-  // }
-
   render() {
     if (this.props.show) {
       return (

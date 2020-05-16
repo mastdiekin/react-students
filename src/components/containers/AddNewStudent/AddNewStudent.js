@@ -26,20 +26,6 @@ class AddNewStudent extends Component {
 
   state = {
     form: {
-      // lName: {
-      //   type: "input",
-      //   format: "text",
-      //   placeholder: "Фамилия",
-      //   value: "",
-      //   class: "",
-      //   required: true,
-      //   validation: {
-      //     required: true,
-      //     minLength: 3,
-      //   },
-      //   valid: false,
-      //   touched: false,
-      // },
       name: {
         type: "input",
         format: "text",
@@ -54,91 +40,106 @@ class AddNewStudent extends Component {
         valid: false,
         touched: false,
       },
-      // dateB: {
-      //   type: "input",
-      //   format: "text",
-      //   placeholder: "Дата рождения",
-      //   value: "",
-      //   class: "",
-      //   required: true,
-      //   validation: {
-      //     required: true,
-      //     minLength: 1,
-      //   },
-      //   valid: false,
-      //   touched: false,
-      // },
-      // faculty: {
-      //   type: "input",
-      //   format: "text",
-      //   placeholder: "Факультет",
-      //   value: "",
-      //   class: "",
-      //   required: true,
-      //   validation: {
-      //     required: true,
-      //     minLength: 3,
-      //   },
-      //   valid: false,
-      //   touched: false,
-      // },
-      // date: {
-      //   type: "input",
-      //   format: "text",
-      //   placeholder: "Дата поступления",
-      //   value: "",
-      //   class: "",
-      //   required: true,
-      //   validation: {
-      //     required: true,
-      //     minLength: 1,
-      //   },
-      //   valid: false,
-      //   touched: false,
-      // },
-      // course: {
-      //   type: "input",
-      //   format: "text",
-      //   placeholder: "Курс",
-      //   value: "",
-      //   class: "",
-      //   required: true,
-      //   validation: {
-      //     required: true,
-      //     minLength: 1,
-      //   },
-      //   valid: false,
-      //   touched: false,
-      // },
-      // adress: {
-      //   type: "textarea",
-      //   format: "text",
-      //   placeholder: "Адрес",
-      //   value: "",
-      //   class: "",
-      //   required: true,
-      //   validation: {
-      //     required: true,
-      //     minLength: 6,
-      //   },
-      //   valid: false,
-      //   touched: false,
-      // },
-      // phone: {
-      //   type: "input",
-      //   format: "text",
-      //   placeholder: "Телефон",
-      //   value: "",
-      //   class: "",
-      //   required: true,
-      //   validation: {
-      //     required: true,
-      //     minLength: 6,
-      //   },
-      //   valid: false,
-      //   touched: false,
-      // },
+      lName: {
+        type: "input",
+        format: "text",
+        placeholder: "Фамилия",
+        value: "",
+        class: "",
+        required: true,
+        validation: {
+          required: true,
+          minLength: 3,
+        },
+        valid: false,
+        touched: false,
+      },
+      year: {
+        type: "input",
+        format: "text",
+        placeholder: "Дата рождения",
+        value: "",
+        class: "",
+        required: true,
+        validation: {
+          required: true,
+          minLength: 1,
+        },
+        valid: false,
+        touched: false,
+      },
+      faculty: {
+        type: "input",
+        format: "text",
+        placeholder: "Факультет",
+        value: "",
+        class: "",
+        required: true,
+        validation: {
+          required: true,
+          minLength: 3,
+        },
+        valid: false,
+        touched: false,
+      },
+      dateReceipt: {
+        type: "input",
+        format: "text",
+        placeholder: "Дата поступления",
+        value: "",
+        class: "",
+        required: true,
+        validation: {
+          required: true,
+          minLength: 1,
+        },
+        valid: false,
+        touched: false,
+      },
+      course: {
+        type: "input",
+        format: "text",
+        placeholder: "Курс",
+        value: "",
+        class: "",
+        required: true,
+        validation: {
+          required: true,
+          minLength: 1,
+        },
+        valid: false,
+        touched: false,
+      },
+      adress: {
+        type: "textarea",
+        format: "text",
+        placeholder: "Адрес",
+        value: "",
+        class: "",
+        required: true,
+        validation: {
+          required: true,
+          minLength: 6,
+        },
+        valid: false,
+        touched: false,
+      },
+      phone: {
+        type: "input",
+        format: "text",
+        placeholder: "Телефон",
+        value: "",
+        class: "",
+        required: true,
+        validation: {
+          required: true,
+          minLength: 6,
+        },
+        valid: false,
+        touched: false,
+      },
     },
+    formIsValid: false,
     show: false,
   };
 
@@ -164,7 +165,13 @@ class AddNewStudent extends Component {
         touched: true,
       },
     };
-    this.setState({ form: updatedControls });
+
+    let formIsValid = true;
+    for (let inputIds in updatedControls) {
+      formIsValid = updatedControls[inputIds].valid && formIsValid;
+    }
+
+    this.setState({ form: updatedControls, formIsValid: formIsValid });
   };
 
   submitForm = (e) => {
@@ -208,6 +215,7 @@ class AddNewStudent extends Component {
             ))}
             <Button
               btnClass={["Newstudent__submit", misc.btn, misc.big].join(" ")}
+              disabled={!this.state.formIsValid}
             >
               Добавить
             </Button>
