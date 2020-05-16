@@ -17,16 +17,6 @@ class Student extends Component {
     }));
   }
 
-  // sortTable = (by) => {
-  //   if (this.props.type !== "table") {
-  //     return false;
-  //   }
-
-  //   sortBy()
-
-  //   console.log(by, this.props.students);
-  // };
-
   render() {
     let typeClass = classes.Student__info;
     let buttons = (
