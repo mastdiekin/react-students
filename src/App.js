@@ -29,7 +29,9 @@ function MSwitch() {
         <Route path="/auth" children={<Auth />} />
         <Route component={Fof} />
       </Switch>
-      {background && <Route path="/auth" children={<Auth showModal />} />}
+      {background && (
+        <Route path="/auth" children={<Auth showModalByRecievedBg />} />
+      )}
     </Aux>
   );
 }

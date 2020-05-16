@@ -19,3 +19,18 @@ export const checkValid = (value, rules) => {
 
   return isValid;
 };
+
+export const backLocationOrCloseModal = (props) => {
+  //если это подалка по url, то нужен props.returnBack={history}
+  //если это обычная модалка у которой в props есть state, то нужно ее закрыть:
+  // close = () => {
+  //   this.setState({
+  //     show: false,
+  //   });
+  // };
+  return props.returnBack || !props.closed
+    ? props.returnBack.goBack(
+        props.returnBack.location.state.background.pathname
+      )
+    : props.closed();
+};
