@@ -5,12 +5,15 @@ import Aux from "../../hoc/Auxx/Auxx";
 import Header from "../../../components/UI/Header/Header";
 import Footer from "../../../components/UI/Footer/Footer";
 import Main from "../../../components/UI/Main/Main";
+import Input from "../../../components/UI/Input/Input";
+import Button from "../../../components/UI/Button/Button";
 
 const form = (
-  <Aux>
-    Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные
-    тексты. Они рот о однажды сбить лучше заголовок одна переулка моей коварный.
-  </Aux>
+  <form>
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+    <Button>Войти</Button>
+  </form>
 );
 
 const Auth = (props) => {
