@@ -130,8 +130,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onDelete: (id) => dispatch(actions.deleteStudent(id)),
-    onSortTable: (by, blockType) =>
-      dispatch(actions.sortStudents(by, blockType)),
+    onSortTable: (by, blockType) => {
+      return blockType === "data"
+        ? false
+        : dispatch(actions.sortStudents(by, blockType));
+    },
   };
 };
 
