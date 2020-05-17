@@ -17,6 +17,17 @@ class Student extends Component {
     }));
   }
 
+  renderSortingDIrection = (by) => {
+    return this.props.sortParams &&
+      this.props.sortParams.key !== undefined &&
+      this.props.sortParams.key === by &&
+      this.props.type !== "data" ? (
+      <div className={this.props.sortParams.key}>
+        {this.props.sortParams.order}
+      </div>
+    ) : null;
+  };
+
   render() {
     let typeClass = classes.Student__info;
     let buttons = (
@@ -60,7 +71,10 @@ class Student extends Component {
                 className="col-1 d-flex"
                 onClick={() => this.props.onSortTable("id", this.props.type)}
               >
-                <div className="id align-self-center">{this.props.data.id}</div>
+                <div className="id align-self-center">
+                  {this.props.data.id}
+                  {this.renderSortingDIrection("id")}
+                </div>
               </div>
               <div
                 className="col-4 d-flex"
@@ -69,6 +83,7 @@ class Student extends Component {
                 <div className={[classes.name, "align-self-center"].join(" ")}>
                   <span className="fname">{this.props.data.name}</span>
                   <span className="lname">{this.props.data.lname}</span>
+                  <span>{this.renderSortingDIrection("lname")}</span>
                 </div>
               </div>
               <div
@@ -77,6 +92,7 @@ class Student extends Component {
               >
                 <div className="year align-self-center">
                   {this.props.data.year}
+                  {this.renderSortingDIrection("year")}
                 </div>
               </div>
               <div
@@ -87,6 +103,7 @@ class Student extends Component {
               >
                 <div className="faculty align-self-center">
                   {this.props.data.faculty}
+                  {this.renderSortingDIrection("faculty")}
                 </div>
               </div>
               <div
@@ -97,6 +114,7 @@ class Student extends Component {
               >
                 <div className="dateReceipt align-self-center">
                   {this.props.data.dateReceipt}
+                  {this.renderSortingDIrection("dateReceipt")}
                 </div>
               </div>
               <div
@@ -107,6 +125,7 @@ class Student extends Component {
               >
                 <div className="course align-self-center">
                   {this.props.data.course}
+                  {this.renderSortingDIrection("course")}
                 </div>
               </div>
             </div>
