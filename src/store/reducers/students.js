@@ -56,19 +56,13 @@ const studentsStore = (state = initStore, action) => {
         error: false,
       };
     case actions.SORT_STUDENTS:
-      if (action.blockType !== "table") {
-        return {
-          ...state,
-        };
-      } else {
-        return {
-          ...state,
-          sortParams: action.data,
-          students: orderBy(state.students, action.by, action.data.order),
-          loading: false,
-          error: false,
-        };
-      }
+      return {
+        ...state,
+        sortParams: action.data,
+        students: orderBy(state.students, action.by, action.data.order),
+        loading: false,
+        error: false,
+      };
     case actions.ADD_STUDENT_START:
       return {
         ...state,

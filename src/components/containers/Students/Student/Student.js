@@ -131,9 +131,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onDelete: (id) => dispatch(actions.deleteStudent(id)),
     onSortTable: (by, blockType) => {
-      return blockType === "data"
-        ? false
-        : dispatch(actions.sortStudents(by, blockType));
+      return blockType === "data" ? false : dispatch(actions.sortStudents(by));
     },
   };
 };
