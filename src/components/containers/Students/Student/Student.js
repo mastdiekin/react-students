@@ -49,6 +49,8 @@ class Student extends Component {
       typeClass = [classes.Student__info, classes.active].join(" ");
     }
 
+    // console.log("sortParams", this.props.sortParams);
+
     return (
       <div className={classes.Student__wrapper}>
         <div className={classes.Student} onClick={() => this.toggleExpand()}>
@@ -117,6 +119,14 @@ class Student extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    students: state.students.students,
+    loading: state.students.loading,
+    sortParams: state.students.sortParams,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onDelete: (id) => dispatch(actions.deleteStudent(id)),
@@ -125,4 +135,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Student);
+export default connect(mapStateToProps, mapDispatchToProps)(Student);

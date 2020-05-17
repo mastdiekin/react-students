@@ -1,5 +1,5 @@
 import * as actions from "../actions/actionTypes";
-import { sortBy, orderBy } from "lodash";
+import { orderBy } from "lodash";
 
 const initStore = {
   students: [
@@ -61,10 +61,10 @@ const studentsStore = (state = initStore, action) => {
           ...state,
         };
       } else {
-        // console.log(state.students, action.by);
         return {
           ...state,
-          students: orderBy(state.students, action.by),
+          sortParams: action.data,
+          students: orderBy(state.students, action.by, action.data.order),
           loading: false,
           error: false,
         };

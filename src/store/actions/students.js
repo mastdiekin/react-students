@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+import { get } from "lodash";
 
 export const initStudents = () => {
   return (dispatch) => {
@@ -22,10 +23,18 @@ export const successStudents = () => {
 };
 
 export const sortStudents = (by, blockType) => {
-  return {
-    type: actionTypes.SORT_STUDENTS,
-    by,
-    blockType,
+  return (dispatch, getState) => {
+    const { sortParams } = getState().students;
+    const order = get(sortParams, "order");
+    dispatch({
+      type: actionTypes.SORT_STUDENTS,
+      by,
+      blockType,
+      data: {
+        key: by,
+        order: order === "desc" ? "asc" : "desc",
+      },
+    });
   };
 };
 
