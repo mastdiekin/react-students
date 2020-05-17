@@ -19,12 +19,14 @@ class Student extends Component {
 
   renderSortingDIrection = (by) => {
     return this.props.sortParams &&
-      this.props.sortParams.key !== undefined &&
       this.props.sortParams.key === by &&
       this.props.type !== "data" ? (
-      <div className={this.props.sortParams.key}>
-        {this.props.sortParams.order}
-      </div>
+      <span
+        className={[
+          this.props.sortParams.key,
+          misc[this.props.sortParams.order],
+        ].join(" ")}
+      ></span>
     ) : null;
   };
 
@@ -96,7 +98,7 @@ class Student extends Component {
                 </div>
               </div>
               <div
-                className="col-4 d-flex"
+                className="col-3 d-flex"
                 onClick={() =>
                   this.props.onSortTable("faculty", this.props.type)
                 }
@@ -107,7 +109,7 @@ class Student extends Component {
                 </div>
               </div>
               <div
-                className="col-1 d-flex"
+                className="col-2 d-flex"
                 onClick={() =>
                   this.props.onSortTable("dateReceipt", this.props.type)
                 }

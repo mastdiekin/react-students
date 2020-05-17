@@ -51,5 +51,15 @@
 		&:hover
 			transform: rotate(360deg)
 
+.asc,
+.desc
+	margin-left: 5px
+	display: inline-block
+
+.asc
+	+arr(10, 7, $students-brand, t)
+.desc
+	+arr(10, 7, $students-brand, b)
+	
 .center
 	text-align: center
