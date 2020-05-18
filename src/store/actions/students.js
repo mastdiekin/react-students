@@ -77,9 +77,36 @@ export const deleteStudent = (id) => {
   };
 };
 
-// export const editStudentStart = (data) => {
-//   return {
-//     type: actionTypes.EDIT_STUDENT_SUBMIT,
-//     data,
-//   };
-// };
+export const editStudentStart = () => {
+  return {
+    type: actionTypes.EDIT_STUDENT_START,
+  };
+};
+
+export const editStudentSubmit = (id, data) => {
+  return (dispatch, getState) => {
+    dispatch(editStudentStart());
+    setTimeout(() => {
+      const newData = getState().students.students.map((el) =>
+        el.id === id ? { ...el, ...data } : el
+      );
+      dispatch(editStudentSuccess(id, newData));
+      //axios, editStudentSuccess...
+    }, 500);
+  };
+};
+
+export const editStudentSuccess = (id, data) => {
+  return {
+    type: actionTypes.EDIT_STUDENT_SUCCESS,
+    id,
+    data,
+  };
+};
+
+export const editStudentError = (error) => {
+  return {
+    type: actionTypes.EDIT_STUDENT_ERROR,
+    error,
+  };
+};

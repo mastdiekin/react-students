@@ -91,12 +91,30 @@ const studentsStore = (state = initStore, action) => {
         loading: false,
         error: false,
       };
-    // case actions.EDIT_STUDENT_SUBMIT:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     error: false,
-    //   };
+    case actions.EDIT_STUDENT_START:
+      return {
+        ...state,
+        loading: true,
+        closeModal: true,
+        error: false,
+      };
+    case actions.EDIT_STUDENT_SUCCESS:
+      console.log("need to add logic...");
+      return {
+        ...state,
+        students: action.data,
+        loading: false,
+        closeModal: false,
+        error: false,
+      };
+    case actions.EDIT_STUDENT_ERROR:
+      console.log("need to add ERROR logic...");
+      return {
+        ...state,
+        loading: false,
+        closeModal: false,
+        error: true,
+      };
     default:
       return state;
   }

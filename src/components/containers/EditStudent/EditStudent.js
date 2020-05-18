@@ -216,8 +216,7 @@ class EditStudent extends Component {
       formData[el] = this.state.form[el].value;
     }
 
-    console.log(formData, this.props.id);
-    // this.props.onEditStudentSubmit(formData); // NEED LOGIC...........................................
+    this.props.onEditStudentSubmit(this.props.id, formData); // NEED LOGIC...........................................
   };
 
   render() {
@@ -287,13 +286,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onEditStudentSubmit: (id, data) => dispatch(actions.editStudentSubmit(id, data)),
-//   };
-// };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onEditStudentSubmit: (id, data) =>
+      dispatch(actions.editStudentSubmit(id, data)),
+  };
+};
 
-export default connect(
-  mapStateToProps
-  // mapDispatchToProps
-)(EditStudent);
+export default connect(mapStateToProps, mapDispatchToProps)(EditStudent);
