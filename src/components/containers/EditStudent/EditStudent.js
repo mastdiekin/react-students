@@ -8,7 +8,7 @@ import { checkValid } from "../../hoc/shared/utility";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import classes from "./EditStudent.sass";
-import { find } from "lodash";
+import { find, map } from "lodash";
 
 class EditStudent extends Component {
   toggle = (e) => {
@@ -169,6 +169,19 @@ class EditStudent extends Component {
     }
     // console.log(formElementsArray);
 
+    // let receivedControls = map(formElementsArray, (el) => {
+    //   return {
+    //     ...this.state.form,
+    //     [el.id]: {
+    //       ...this.state.form[el.id],
+    //       value: el.value,
+    //     },
+    //   };
+    //   console.log(el.value);
+    // });
+    // console.log(receivedControls);
+
+    //---------------------------------------------------------------------------!
     let receivedControls = {};
     formElementsArray.map((el) => {
       receivedControls = {
