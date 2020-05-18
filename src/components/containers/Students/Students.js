@@ -32,7 +32,7 @@ class Students extends Component {
         data={{
           id: "#",
           name: "Имя",
-          lname: "Фамилия",
+          lName: "Фамилия",
           year: "Год",
           dateReceipt: "Дата поступл.",
           faculty: "Факультет",

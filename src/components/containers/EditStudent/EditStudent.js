@@ -172,15 +172,17 @@ class EditStudent extends Component {
 
     //переберем коллекцию, и подставим значения текущей записи
     let receivedControls = {};
-    const r = formElementsArray.map((el) => {
+    formElementsArray.map((el) => {
       return (receivedControls[el.id] = {
         ...this.state.form[el.id],
         value: el.value,
         id: el.id,
+        valid: true,
+        touched: true,
       });
     });
 
-    this.setState({ form: receivedControls });
+    this.setState({ form: receivedControls, formIsValid: true });
   };
 
   //   componentDidUpdate() {
@@ -214,7 +216,8 @@ class EditStudent extends Component {
       formData[el] = this.state.form[el].value;
     }
 
-    // this.props.onEditStudentSubmit(formData); // NEED RECIEVE ID
+    console.log(formData, this.props.id);
+    // this.props.onEditStudentSubmit(formData); // NEED LOGIC...........................................
   };
 
   render() {

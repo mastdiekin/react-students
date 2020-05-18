@@ -81,12 +81,12 @@ class Student extends Component {
               </div>
               <div
                 className="col-4 d-flex"
-                onClick={() => this.props.onSortTable("lname", this.props.type)}
+                onClick={() => this.props.onSortTable("lName", this.props.type)}
               >
                 <div className={[classes.name, "align-self-center"].join(" ")}>
                   <span className="fname">{this.props.data.name}</span>
-                  <span className="lname">{this.props.data.lname}</span>
-                  <span>{this.renderSortingDIrection("lname")}</span>
+                  <span className="lname">{this.props.data.lName}</span>
+                  <span>{this.renderSortingDIrection("lName")}</span>
                 </div>
               </div>
               <div
