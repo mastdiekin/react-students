@@ -16,6 +16,7 @@ class EditStudent extends Component {
       show: !this.state.show,
     });
     document.body.style.overflow = "hidden";
+    this.editStudentFormReveive();
   };
 
   close = () => {
@@ -149,6 +150,12 @@ class EditStudent extends Component {
       this.setState({ show: false });
     }
   }
+
+  editStudentFormReveive = () => {
+    console.log(this.props.students, this.props.id);
+
+    //logic...
+  };
 
   onChangeInput = (event, id) => {
     const updatedControls = {
