@@ -3,6 +3,7 @@ import classes from "./Student.sass";
 import misc from "../../../../assets/sass/misc.sass";
 import * as actions from "../../../../store/actions";
 import { connect } from "react-redux";
+import EditStudent from "../../EditStudent/EditStudent";
 
 class Student extends Component {
   state = {
@@ -34,7 +35,7 @@ class Student extends Component {
     let typeClass = classes.Student__info;
     let buttons = (
       <div className={classes.Student__buttons}>
-        <button id={classes.edit} title="Изменить"></button>
+        <EditStudent id={this.props.data.id} />
         <button
           id={classes.detete}
           title="Удалить"
