@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import classes from "./EditStudent.sass";
 import { find, map } from "lodash";
+import { studentState } from "../Auth/utility/auth";
 
 class EditStudent extends Component {
   toggle = (e) => {
@@ -27,124 +28,7 @@ class EditStudent extends Component {
     document.body.style.overflow = "auto";
   };
 
-  state = {
-    form: {
-      name: {
-        type: "input",
-        format: "text",
-        placeholder: "Имя",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 2,
-        },
-        valid: false,
-        touched: false,
-      },
-      lName: {
-        type: "input",
-        format: "text",
-        placeholder: "Фамилия",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 3,
-        },
-        valid: false,
-        touched: false,
-      },
-      year: {
-        type: "input",
-        format: "text",
-        placeholder: "Дата рождения",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 1,
-        },
-        valid: false,
-        touched: false,
-      },
-      faculty: {
-        type: "input",
-        format: "text",
-        placeholder: "Факультет",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 3,
-        },
-        valid: false,
-        touched: false,
-      },
-      dateReceipt: {
-        type: "input",
-        format: "text",
-        placeholder: "Дата поступления",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 1,
-        },
-        valid: false,
-        touched: false,
-      },
-      course: {
-        type: "input",
-        format: "text",
-        placeholder: "Курс",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 1,
-        },
-        valid: false,
-        touched: false,
-      },
-      adress: {
-        type: "textarea",
-        format: "text",
-        placeholder: "Адрес",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 6,
-        },
-        valid: false,
-        touched: false,
-      },
-      phone: {
-        type: "input",
-        format: "text",
-        placeholder: "Телефон",
-        value: "",
-        class: "",
-        required: true,
-        validation: {
-          required: true,
-          minLength: 6,
-        },
-        valid: false,
-        touched: false,
-      },
-    },
-    formIsValid: false,
-    show: false,
-  };
+  state = studentState;
 
   componentDidUpdate(nextProps) {
     if (nextProps.closeModal) {
