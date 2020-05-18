@@ -8,7 +8,7 @@ import { checkValid } from "../../hoc/shared/utility";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import classes from "./EditStudent.sass";
-import { find } from "lodash";
+import { find, map, assign } from "lodash";
 
 class EditStudent extends Component {
   toggle = (e) => {
@@ -164,23 +164,24 @@ class EditStudent extends Component {
       formElementsArray.push({
         id: key,
         value: receivedStudent[key],
-        config: this.state.form[key],
+        // config: this.state.form[key],
       });
     }
     // console.log(formElementsArray);
 
     let receivedControls = {};
-    formElementsArray.map((el, i) => {
+    formElementsArray.map((el, index) => {
       receivedControls = {
         ...this.state.form,
         [el.id]: {
           ...this.state.form[el.id],
-          //   value: formElementsArray[i].value,
+          value: formElementsArray[index].value,
         },
       };
     });
     console.log(receivedControls);
 
+    //----------------------------------------------------------------------------
     // let receivedControls = {};
     // formElementsArray.map((el, i) => {
     //   receivedControls = {
