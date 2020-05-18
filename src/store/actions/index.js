@@ -1,7 +1,6 @@
 export {
   initStudents,
   deleteStudent,
-  // editStudentStart,
   // editStudentSubmit,
   startStudents,
   sortStudents,

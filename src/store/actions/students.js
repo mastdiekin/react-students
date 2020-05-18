@@ -77,9 +77,9 @@ export const deleteStudent = (id) => {
   };
 };
 
-// export const editStudentStart = (id) => {
+// export const editStudentStart = (data) => {
 //   return {
-//     type: actionTypes.EDIT_STUDENT_START,
-//     id,
+//     type: actionTypes.EDIT_STUDENT_SUBMIT,
+//     data,
 //   };
 // };

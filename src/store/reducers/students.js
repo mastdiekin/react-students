@@ -91,7 +91,7 @@ const studentsStore = (state = initStore, action) => {
         loading: false,
         error: false,
       };
-    // case actions.EDIT_STUDENT_START:
+    // case actions.EDIT_STUDENT_SUBMIT:
     //   return {
     //     ...state,
     //     loading: false,

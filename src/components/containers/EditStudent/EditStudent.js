@@ -8,6 +8,7 @@ import { checkValid } from "../../hoc/shared/utility";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import classes from "./EditStudent.sass";
+import { find } from "lodash";
 
 class EditStudent extends Component {
   toggle = (e) => {
@@ -16,7 +17,7 @@ class EditStudent extends Component {
       show: !this.state.show,
     });
     document.body.style.overflow = "hidden";
-    this.editStudentFormReveive();
+    this.editStudentFormReceive();
   };
 
   close = () => {
@@ -151,10 +152,14 @@ class EditStudent extends Component {
     }
   }
 
-  editStudentFormReveive = () => {
-    console.log(this.props.students, this.props.id);
+  editStudentFormReceive = () => {
+    const receivedStudent = find(
+      this.props.students,
+      (o) => o.id === this.props.id
+    );
+    console.log(receivedStudent);
 
-    //logic...
+    // this.setState({ form: receivedControls });
   };
 
   onChangeInput = (event, id) => {
@@ -240,7 +245,6 @@ class EditStudent extends Component {
           id={classes.edit}
           title="Изменить"
           onClick={(event) => this.toggle(event)}
-          // onClick={() => this.props.onEditStudentStart(this.props.data.id)}
         ></button>
         {isShowModal}
       </Aux>
@@ -257,7 +261,6 @@ const mapStateToProps = (state) => {
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {
-//     onEditStudentStart: (id) => dispatch(actions.editStudentStart(id)),
 //     onEditStudentSubmit: (id, data) => dispatch(actions.editStudentSubmit(id, data)),
 //   };
 // };
