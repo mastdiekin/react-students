@@ -153,12 +153,14 @@ class EditStudent extends Component {
   }
 
   editStudentFormReceive = () => {
+    //найдем текущую запись
     const receivedStudent = find(
       this.props.students,
       (o) => o.id === this.props.id
     );
     // console.log(receivedStudent);
 
+    //из текущей формы, сделаем коллекцию, которой присвоим value текущей записи
     const formElementsArray = [];
     for (let key in this.state.form) {
       formElementsArray.push({
@@ -168,29 +170,15 @@ class EditStudent extends Component {
     }
     // console.log(formElementsArray);
 
-    const receivedControls = formElementsArray.map((el) => {
-      return {
+    //переберем коллекцию, и подставим значения текущей записи
+    let receivedControls = {};
+    const r = formElementsArray.map((el) => {
+      return (receivedControls[el.id] = {
         ...this.state.form[el.id],
         value: el.value,
         id: el.id,
-      };
+      });
     });
-    console.log(receivedControls);
-
-    //---------------------------------------------------------------------------!
-    // let receivedControls = {};
-    // formElementsArray.map((el) => {
-    //   receivedControls = {
-    //     ...this.state.form,
-    //     [el.id]: {
-    //       ...this.state.form[el.id],
-    //       value: el.value,
-    //       id: el.id,
-    //     },
-    //   };
-    //   console.log(el.value);
-    // });
-    // console.log(receivedControls);
 
     this.setState({ form: receivedControls });
   };
