@@ -164,47 +164,31 @@ class EditStudent extends Component {
       formElementsArray.push({
         id: key,
         value: receivedStudent[key],
-        // config: this.state.form[key],
       });
     }
     // console.log(formElementsArray);
 
-    // let receivedControls = map(formElementsArray, (el) => {
-    //   return {
+    const receivedControls = formElementsArray.map((el) => {
+      return {
+        ...this.state.form[el.id],
+        value: el.value,
+        id: el.id,
+      };
+    });
+    console.log(receivedControls);
+
+    //---------------------------------------------------------------------------!
+    // let receivedControls = {};
+    // formElementsArray.map((el) => {
+    //   receivedControls = {
     //     ...this.state.form,
     //     [el.id]: {
     //       ...this.state.form[el.id],
     //       value: el.value,
+    //       id: el.id,
     //     },
     //   };
     //   console.log(el.value);
-    // });
-    // console.log(receivedControls);
-
-    //---------------------------------------------------------------------------!
-    let receivedControls = {};
-    formElementsArray.map((el) => {
-      receivedControls = {
-        ...this.state.form,
-        [el.id]: {
-          ...this.state.form[el.id],
-          value: el.value,
-        },
-      };
-      console.log(el.value);
-    });
-    console.log(receivedControls);
-
-    //----------------------------------------------------------------------------
-    // let receivedControls = {};
-    // formElementsArray.map((el, i) => {
-    //   receivedControls = {
-    //     ...formElementsArray,
-    //     [el.id]: {
-    //       ...formElementsArray[el.id],
-    //       //   value: formElementsArray[i].value,
-    //     },
-    //   };
     // });
     // console.log(receivedControls);
 
