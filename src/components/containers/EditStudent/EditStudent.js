@@ -193,28 +193,34 @@ class EditStudent extends Component {
     if (this.state.show) {
       isShowModal = (
         <Modal show={() => this.toggle()} closed={() => this.close()}>
-          <form onSubmit={this.submitForm}>
-            {formElementsArray.map((el) => (
-              <Input
-                key={el.id}
-                format={el.config.format}
-                type={el.config.type}
-                placeholder={el.config.placeholder}
-                class={el.config.class}
-                value={el.config.value}
-                invalid={!el.config.valid}
-                shouldValidate={el.config.validation}
-                touched={el.config.touched}
-                changed={(event) => this.onChangeInput(event, el.id)}
-              />
-            ))}
-            <Button
-              btnClass={["Newstudent__submit", misc.btn, misc.big].join(" ")}
-              disabled={!this.state.formIsValid}
-            >
-              Добавить
-            </Button>
-          </form>
+          <p className={misc.center}>
+            Редактирование анкеты: #
+            <span className={misc.big}>{this.props.id}</span>
+          </p>
+          <div className={classes.EditStudent}>
+            <form onSubmit={this.submitForm}>
+              {formElementsArray.map((el) => (
+                <Input
+                  key={el.id}
+                  format={el.config.format}
+                  type={el.config.type}
+                  placeholder={el.config.placeholder}
+                  class={el.config.class}
+                  value={el.config.value}
+                  invalid={!el.config.valid}
+                  shouldValidate={el.config.validation}
+                  touched={el.config.touched}
+                  changed={(event) => this.onChangeInput(event, el.id)}
+                />
+              ))}
+              <Button
+                btnClass={[misc.btn, misc.big].join(" ")}
+                disabled={!this.state.formIsValid}
+              >
+                Изменить
+              </Button>
+            </form>
+          </div>
         </Modal>
       );
     } else {
@@ -226,6 +232,7 @@ class EditStudent extends Component {
         <button
           id={classes.edit}
           title="Изменить"
+          onClick={(event) => this.toggle(event)}
           // onClick={() => this.props.onEditStudentStart(this.props.data.id)}
         ></button>
         {isShowModal}

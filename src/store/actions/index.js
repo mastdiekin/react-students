@@ -2,7 +2,7 @@ export {
   initStudents,
   deleteStudent,
   // editStudentStart,
-  // onEditStudentSubmit,
+  // editStudentSubmit,
   startStudents,
   sortStudents,
   newStudent,
