@@ -6,7 +6,7 @@ const initStore = {
     {
       id: "z",
       name: "Алексей",
-      lname: "Ворошилов",
+      lName: "Ворошилов",
       year: 1996,
       faculty: "Журналистики",
       dateReceipt: 2012,
@@ -17,7 +17,7 @@ const initStore = {
     {
       id: "f",
       name: "Дмитрий",
-      lname: "Донцов",
+      lName: "Донцов",
       year: 1995,
       faculty: "Психологии",
       dateReceipt: 2019,
@@ -28,7 +28,7 @@ const initStore = {
     {
       id: "n",
       name: "Василий",
-      lname: "Пепелец",
+      lName: "Пепелец",
       year: 1990,
       faculty: "Психологии",
       dateReceipt: 2054,
