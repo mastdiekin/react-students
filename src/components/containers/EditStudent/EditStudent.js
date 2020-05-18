@@ -157,9 +157,43 @@ class EditStudent extends Component {
       this.props.students,
       (o) => o.id === this.props.id
     );
-    console.log(receivedStudent);
+    // console.log(receivedStudent);
 
-    // this.setState({ form: receivedControls });
+    const formElementsArray = [];
+    for (let key in this.state.form) {
+      formElementsArray.push({
+        id: key,
+        value: receivedStudent[key],
+        config: this.state.form[key],
+      });
+    }
+    // console.log(formElementsArray);
+
+    let receivedControls = {};
+    formElementsArray.map((el, i) => {
+      receivedControls = {
+        ...this.state.form,
+        [el.id]: {
+          ...this.state.form[el.id],
+          //   value: formElementsArray[i].value,
+        },
+      };
+    });
+    console.log(receivedControls);
+
+    // let receivedControls = {};
+    // formElementsArray.map((el, i) => {
+    //   receivedControls = {
+    //     ...formElementsArray,
+    //     [el.id]: {
+    //       ...formElementsArray[el.id],
+    //       //   value: formElementsArray[i].value,
+    //     },
+    //   };
+    // });
+    // console.log(receivedControls);
+
+    this.setState({ form: receivedControls });
   };
 
   onChangeInput = (event, id) => {
