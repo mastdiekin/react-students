@@ -56,16 +56,33 @@ export const newStudentStart = () => {
 export const newStudent = (newstudent) => {
   return (dispatch) => {
     dispatch(newStudentStart());
-    axios({
-      method: "POST",
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      data: qs.stringify(newstudent),
-      url: api + "/students/add",
-    })
+    // axios({
+    //   method: "POST",
+    //   headers: { "content-type": "application/x-www-form-urlencoded" },
+    //   data: qs.stringify(newstudent),
+    //   url: api + "/students/add",
+    // })
+    //   .then((response) => {
+    //     dispatch(newStudentSuccess(response.data));
+    //   })
+    //   .catch((err) => {
+    //     dispatch(newStudentError(err));
+    //   });
+
+    axios
+      .post(api + "/students/add", qs.stringify(newstudent))
       .then((response) => {
-        dispatch(newStudentSuccess(response.data));
+        console.log(response);
+        if (response.data === "Student validation failed") {
+          dispatch(newStudentError(response.data));
+        } else {
+          dispatch(newStudentSuccess(response.data));
+        }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        // console.log(err.data);
+        dispatch(newStudentError(err.data));
+      });
   };
 };
 
@@ -85,9 +102,29 @@ export const newStudentError = (error) => {
 //newStudent end
 
 export const deleteStudent = (id) => {
+  return (dispatch) => {
+    axios({
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      data: qs.stringify(id),
+      url: api + "/students/" + id + "/delete",
+    }).then((response) => {
+      dispatch(deleteStudentSuccess(response.data));
+    });
+  };
+};
+
+export const deleteStudentSuccess = (deletedStudent) => {
   return {
-    type: actionTypes.DELETE_STUDENT,
-    id,
+    type: actionTypes.DELETE_STUDENT_SUCCESS,
+    id: deletedStudent.id,
+  };
+};
+
+export const deleteStudentError = (error) => {
+  return {
+    type: actionTypes.DELETE_STUDENT_ERROR,
+    error,
   };
 };
 

@@ -49,14 +49,21 @@ const studentsStore = (state = initStore, action) => {
       return {
         ...state,
         loading: false,
+        closeModal: false,
         error: true,
       };
-    case actions.DELETE_STUDENT:
+    case actions.DELETE_STUDENT_SUCCESS:
       return {
         ...state,
         students: state.students.filter((item) => item.id !== action.id),
         loading: false,
         error: false,
+      };
+    case actions.DELETE_STUDENT_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: true,
       };
     case actions.EDIT_STUDENT_START:
       return {

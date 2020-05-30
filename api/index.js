@@ -19,6 +19,7 @@ api.get("/api/students/:id", (req, res) => {
 
 //POST Add new student //MONGOOSE
 api.post("/api/students/add", (req, res) => {
+  // console.log(req.body);
   const student = new Student({
     age: req.body.age,
     name: req.body.name,
@@ -38,7 +39,7 @@ api.post("/api/students/add", (req, res) => {
       console.log(result);
       return res.json(result);
     })
-    .catch((err) => res.status(400).json(err));
+    .catch((err) => res.json(err._message));
 });
 
 //POST Edit student //MONGOOSE
