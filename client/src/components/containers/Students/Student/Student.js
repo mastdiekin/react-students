@@ -47,7 +47,7 @@ class Student extends Component {
       <div className={classes.Student__expand}>
         <div className="row">
           <div className="col-12">
-            <div className="adress">{this.props.data.adress}</div>
+            <div className="address">{this.props.data.address}</div>
             <div className="phone">{this.props.data.phone}</div>
           </div>
         </div>

@@ -1,13 +1,19 @@
 import * as actionTypes from "./actionTypes";
 import { get } from "lodash";
 import { act } from "react-dom/test-utils";
+import axios from "axios";
+import { api } from "../../components/hoc/shared/utility";
 
 export const initStudents = () => {
   return (dispatch) => {
     dispatch(startStudents());
-    setTimeout(() => {
-      dispatch(successStudents());
-    }, 500);
+
+    axios
+      .get(api + "/students")
+      .then((response) => {
+        dispatch(successStudents(response.data));
+      })
+      .catch((err) => console.log(err));
   };
 };
 
@@ -17,9 +23,10 @@ export const startStudents = () => {
   };
 };
 
-export const successStudents = () => {
+export const successStudents = (data) => {
   return {
     type: actionTypes.SUCCESS_STUDENTS,
+    data,
   };
 };
 
