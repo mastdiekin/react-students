@@ -81,7 +81,6 @@ const studentsStore = (state = initStore, action) => {
         error: false,
       };
     case actions.EDIT_STUDENT_ERROR:
-      console.log("need to add ERROR logic...");
       return {
         ...state,
         loading: false,

@@ -73,10 +73,10 @@ export const newStudent = (newstudent) => {
       .post(api + "/students/add", qs.stringify(newstudent))
       .then((response) => {
         console.log(response);
-        if (response.data === "Student validation failed") {
-          dispatch(newStudentError(response.data));
-        } else {
+        if (response.status === 200) {
           dispatch(newStudentSuccess(response.data));
+        } else {
+          dispatch(newStudentError(response.data));
         }
       })
       .catch((err) => {
@@ -137,13 +137,21 @@ export const editStudentStart = () => {
 export const editStudentSubmit = (id, data) => {
   return (dispatch, getState) => {
     dispatch(editStudentStart());
-    setTimeout(() => {
-      const newData = getState().students.students.map((el) =>
-        el.id === id ? { ...el, ...data } : el
-      );
-      dispatch(editStudentSuccess(id, newData));
-      //axios, editStudentSuccess...
-    }, 500);
+    axios
+      .post(api + "/students/" + id + "/edit", qs.stringify(data))
+      .then((response) => {
+        if (response.status === 200) {
+          const newData = getState().students.students.map((el) =>
+            el.id === id ? { ...el, ...response.data } : el
+          );
+          dispatch(editStudentSuccess(id, newData));
+        } else {
+          dispatch(editStudentError(response.data));
+        }
+      })
+      .catch((err) => {
+        dispatch(editStudentError(err.data));
+      });
   };
 };
 
