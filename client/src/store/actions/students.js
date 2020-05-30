@@ -3,6 +3,7 @@ import { get } from "lodash";
 import { act } from "react-dom/test-utils";
 import axios from "axios";
 import { api } from "../../components/hoc/shared/utility";
+import qs from "qs";
 
 export const initStudents = () => {
   return (dispatch) => {
@@ -55,10 +56,16 @@ export const newStudentStart = () => {
 export const newStudent = (newstudent) => {
   return (dispatch) => {
     dispatch(newStudentStart());
-    setTimeout(() => {
-      dispatch(newStudentSuccess(newstudent));
-      //axios, newStudentError...
-    }, 500);
+    axios({
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      data: qs.stringify(newstudent),
+      url: api + "/students/add",
+    })
+      .then((response) => {
+        dispatch(newStudentSuccess(response.data));
+      })
+      .catch((err) => console.log(err));
   };
 };
 

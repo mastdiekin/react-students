@@ -42,6 +42,20 @@ export const studentState = {
       valid: false,
       touched: false,
     },
+    age: {
+      type: "input",
+      format: "text",
+      placeholder: "Возраст",
+      value: "",
+      class: "",
+      required: true,
+      validation: {
+        required: true,
+        minLength: 1,
+      },
+      valid: false,
+      touched: false,
+    },
     faculty: {
       type: "input",
       format: "text",
@@ -84,7 +98,7 @@ export const studentState = {
       valid: false,
       touched: false,
     },
-    adress: {
+    address: {
       type: "textarea",
       format: "text",
       placeholder: "Адрес",
@@ -102,6 +116,20 @@ export const studentState = {
       type: "input",
       format: "text",
       placeholder: "Телефон",
+      value: "",
+      class: "",
+      required: true,
+      validation: {
+        required: true,
+        minLength: 6,
+      },
+      valid: false,
+      touched: false,
+    },
+    photo: {
+      type: "input",
+      format: "text",
+      placeholder: "Фото",
       value: "",
       class: "",
       required: true,

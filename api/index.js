@@ -30,11 +30,14 @@ api.post("/api/students/add", (req, res) => {
     phone: req.body.phone,
     photo: req.body.photo,
     address: req.body.address,
-    userId: req.user,
+    // userId: req.user, //ВЕРНУТЬ КОГДА БУДУТ ПОЛЬЗОВАТЕЛИ
   });
-  student
+  return student
     .save()
-    .then((result) => res.json(result))
+    .then((result) => {
+      console.log(result);
+      return res.json(result);
+    })
     .catch((err) => res.status(400).json(err));
 });
 

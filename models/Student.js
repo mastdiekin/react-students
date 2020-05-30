@@ -43,11 +43,11 @@ const Student = new Schema({
     type: String,
     required: true,
   },
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
+  // userId: { //ВЕРНУТЬ КОГДА БУДУТ ПОЛЬЗОВАТЕЛИ
+  //   type: Schema.Types.ObjectId,
+  //   ref: "User",
+  //   required: true,
+  // },
 });
 
 Student.plugin(AutoIncrement, { inc_field: "id" });
