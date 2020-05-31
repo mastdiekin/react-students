@@ -36,10 +36,10 @@ api.post("/api/students/add", (req, res) => {
   return student
     .save()
     .then((result) => {
-      console.log(result);
       return res.json(result);
     })
-    .catch((err) => res.json(err._message));
+
+    .catch((err) => res.status(400).send(err));
 });
 
 //POST Edit student //MONGOOSE
@@ -62,7 +62,7 @@ api.post("/api/students/:id/edit", (req, res) => {
     .then((result) => {
       res.json(result);
     })
-    .catch((err) => res.status(400).json(err));
+    .catch((err) => res.status(400).send(err));
 });
 
 //POST Delete student //MONGOOSE
@@ -70,7 +70,7 @@ api.post("/api/students/:id/delete", (req, res) => {
   const id = req.params.id;
   Student.findOneAndRemove({ id: id })
     .then((result) => res.json(result))
-    .catch((err) => res.status(400).json(err));
+    .catch((err) => res.status(400).send(err));
 });
 
 module.exports = api;

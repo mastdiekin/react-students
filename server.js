@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bp = require("body-parser");
 const api = require("./api");
 const cors = require("cors");
+const path = require("path");
 
 const db = "mongodb://localhost/students";
 
@@ -22,6 +23,13 @@ mongoose
   })
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const port = process.env.PORT || 5000;
 

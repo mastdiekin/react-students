@@ -56,32 +56,13 @@ export const newStudentStart = () => {
 export const newStudent = (newstudent) => {
   return (dispatch) => {
     dispatch(newStudentStart());
-    // axios({
-    //   method: "POST",
-    //   headers: { "content-type": "application/x-www-form-urlencoded" },
-    //   data: qs.stringify(newstudent),
-    //   url: api + "/students/add",
-    // })
-    //   .then((response) => {
-    //     dispatch(newStudentSuccess(response.data));
-    //   })
-    //   .catch((err) => {
-    //     dispatch(newStudentError(err));
-    //   });
-
     axios
       .post(api + "/students/add", qs.stringify(newstudent))
       .then((response) => {
-        console.log(response);
-        if (response.status === 200) {
-          dispatch(newStudentSuccess(response.data));
-        } else {
-          dispatch(newStudentError(response.data));
-        }
+        dispatch(newStudentSuccess(response.data));
       })
       .catch((err) => {
-        // console.log(err.data);
-        dispatch(newStudentError(err.data));
+        dispatch(newStudentError(err.response.message));
       });
   };
 };
@@ -103,14 +84,14 @@ export const newStudentError = (error) => {
 
 export const deleteStudent = (id) => {
   return (dispatch) => {
-    axios({
-      method: "POST",
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      data: qs.stringify(id),
-      url: api + "/students/" + id + "/delete",
-    }).then((response) => {
-      dispatch(deleteStudentSuccess(response.data));
-    });
+    axios
+      .post(api + "/students/" + id + "/delete", qs.stringify(id))
+      .then((response) => {
+        dispatch(deleteStudentSuccess(response.data));
+      })
+      .catch((err) => {
+        dispatch(deleteStudentError(err.response.message));
+      });
   };
 };
 
@@ -140,17 +121,13 @@ export const editStudentSubmit = (id, data) => {
     axios
       .post(api + "/students/" + id + "/edit", qs.stringify(data))
       .then((response) => {
-        if (response.status === 200) {
-          const newData = getState().students.students.map((el) =>
-            el.id === id ? { ...el, ...response.data } : el
-          );
-          dispatch(editStudentSuccess(id, newData));
-        } else {
-          dispatch(editStudentError(response.data));
-        }
+        const newData = getState().students.students.map((el) =>
+          el.id === id ? { ...el, ...response.data } : el
+        );
+        dispatch(editStudentSuccess(id, newData));
       })
       .catch((err) => {
-        dispatch(editStudentError(err.data));
+        dispatch(editStudentError(err.response.message));
       });
   };
 };
