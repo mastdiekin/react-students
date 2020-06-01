@@ -4,18 +4,30 @@ import misc from "../../../assets/sass/misc.sass";
 import Backdrop from "../Backdrop/Backdrop";
 import Button from "../Button/Button";
 import { backLocationOrCloseModal } from "../../hoc/shared/utility";
+import { connect } from "react-redux";
 
 class Modal extends Component {
+  state = {
+    loading: null,
+  };
+
   shouldComponentUpdate(nextProps, nextState) {
     return (
       nextProps.show !== this.props.show ||
+      nextProps.users.loading !== this.props.users.loading ||
       nextProps.children !== this.props.children
     );
   }
 
+  componentDidUpdate() {
+    this.setState({
+      loading: this.props.users.loading,
+    });
+  }
+
   render() {
-    return this.props.show ? (
-      <div className={classes.Modal}>
+    return this.props.show && !this.state.loading ? (
+      <div className={[classes.Modal, this.props.customClass].join(" ")}>
         <Backdrop
           show={this.props.show}
           returnBack={this.props.returnBack}
@@ -35,4 +47,10 @@ class Modal extends Component {
   }
 }
 
-export default Modal;
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+  };
+};
+
+export default connect(mapStateToProps)(Modal);

@@ -1,25 +1,29 @@
 const express = require("express");
 const api = express.Router();
 const Student = require("../models/Student");
+const auth = require("../middleware/auth");
 
-//GET Students //MONGOOSE
-api.get("/api/students", (req, res) => {
+//GET Students
+api.get("/", (req, res) => {
   Student.find()
     .then((data) => res.json(data))
     .catch((err) => res.status(400).render(err));
 });
 
-//GET Student by ID //MONGOOSE
-api.get("/api/students/:id", (req, res) => {
+//GET Student by ID
+api.get("/:id", (req, res) => {
   const id = req.params.id;
   Student.findOne({ id: id })
     .then((data) => res.json(data))
     .catch((err) => res.status(400).json(err));
 });
 
-//POST Add new student //MONGOOSE
-api.post("/api/students/add", (req, res) => {
-  // console.log(req.body);
+//POST Add new student
+// api.post("/add", auth, (req, res) => {
+api.post("/add", (req, res) => {
+  if (req.body.newstudent) {
+    req.body = req.body.newstudent;
+  }
   const student = new Student({
     age: req.body.age,
     name: req.body.name,
@@ -42,8 +46,11 @@ api.post("/api/students/add", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
-//POST Edit student //MONGOOSE
-api.post("/api/students/:id/edit", (req, res) => {
+//POST Edit student
+api.post("/:id/edit", (req, res) => {
+  if (req.body.data) {
+    req.body = req.body.data;
+  }
   const id = req.params.id;
   Student.findOne({ id: id })
     .then((student) => {
@@ -65,8 +72,8 @@ api.post("/api/students/:id/edit", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
-//POST Delete student //MONGOOSE
-api.post("/api/students/:id/delete", (req, res) => {
+//POST Delete student
+api.post("/:id/delete", (req, res) => {
   const id = req.params.id;
   Student.findOneAndRemove({ id: id })
     .then((result) => res.json(result))

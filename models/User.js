@@ -5,15 +5,19 @@ const Schema = mongoose.Schema;
 const User = new Schema({
   login: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
     required: true,
+  },
+  register_date: {
+    type: Date,
+    default: Date.now,
   },
   resetToken: String,
   resetTokenExp: Date,

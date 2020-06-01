@@ -1,9 +1,9 @@
 import React from "react";
 import classes from "./Spinner.sass";
 
-const spinner = () => {
+const spinner = (props) => {
   return (
-    <div className={classes.Spinner}>
+    <div className={[classes.Spinner, props.customClass].join(" ")}>
       <span className={[classes.side, classes.sp_left].join(" ")}>
         <span className={classes.fill}></span>
       </span>

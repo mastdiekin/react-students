@@ -3,7 +3,13 @@ import { get } from "lodash";
 import { act } from "react-dom/test-utils";
 import axios from "axios";
 import { api } from "../../components/hoc/shared/utility";
-import qs from "qs";
+
+const axiosDataConfig = {
+  headers: {
+    "Content-Type": "application/json",
+    "x-auth-token": localStorage.getItem("token"),
+  },
+};
 
 export const initStudents = () => {
   return (dispatch) => {
@@ -56,8 +62,9 @@ export const newStudentStart = () => {
 export const newStudent = (newstudent) => {
   return (dispatch) => {
     dispatch(newStudentStart());
+    const body = JSON.stringify({ newstudent });
     axios
-      .post(api + "/students/add", qs.stringify(newstudent))
+      .post(api + "/students/add", body, axiosDataConfig)
       .then((response) => {
         dispatch(newStudentSuccess(response.data));
       })
@@ -84,8 +91,9 @@ export const newStudentError = (error) => {
 
 export const deleteStudent = (id) => {
   return (dispatch) => {
+    const body = JSON.stringify({ id });
     axios
-      .post(api + "/students/" + id + "/delete", qs.stringify(id))
+      .post(api + "/students/" + id + "/delete", body, axiosDataConfig)
       .then((response) => {
         dispatch(deleteStudentSuccess(response.data));
       })
@@ -118,8 +126,9 @@ export const editStudentStart = () => {
 export const editStudentSubmit = (id, data) => {
   return (dispatch, getState) => {
     dispatch(editStudentStart());
+    const body = JSON.stringify({ data });
     axios
-      .post(api + "/students/" + id + "/edit", qs.stringify(data))
+      .post(api + "/students/" + id + "/edit", body, axiosDataConfig)
       .then((response) => {
         const newData = getState().students.students.map((el) =>
           el.id === id ? { ...el, ...response.data } : el

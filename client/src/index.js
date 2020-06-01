@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import studentsStore from "./store/reducers/students";
+import usersStore from "./store/reducers/users";
 
 const composeEnhancers =
   process.env.NODE_ENV === "development"
@@ -18,6 +19,7 @@ const composeEnhancers =
 
 const rootReducer = combineReducers({
   students: studentsStore,
+  users: usersStore,
 });
 
 const store = createStore(

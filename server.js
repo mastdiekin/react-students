@@ -1,25 +1,29 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bp = require("body-parser");
-const api = require("./api");
+const studentsApi = require("./api/students");
+const usersApi = require("./api/users");
 const cors = require("cors");
 const path = require("path");
+const config = require("config");
 
-const db = "mongodb://localhost/students";
+//db
+const db = config.get("mongoURI");
 
 const app = express();
 
 //middleware
-app.use(bp.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.use(cors());
-app.use(api);
+app.use("/api/students", studentsApi);
+app.use("/api/users", usersApi);
 
 //db
 mongoose
   .connect(db, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   })
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
