@@ -23,7 +23,11 @@ const auth = require("../middleware/auth");
 
 //POST Register user
 api.post("/register", (req, res) => {
-  const { login, email, password } = req.body;
+  const {
+    // login,
+    email,
+    password,
+  } = req.body;
 
   if (!email || !password) {
     return res.status(400).send({
@@ -32,9 +36,9 @@ api.post("/register", (req, res) => {
     });
   }
 
-  if (!login) {
-    let login = undefined;
-  }
+  // if (!login) {
+  //   let login = undefined;
+  // }
 
   User.findOne({ email: email })
     .then((user) => {
@@ -46,7 +50,7 @@ api.post("/register", (req, res) => {
       }
 
       const newUser = new User({
-        login,
+        // login,
         email,
         password,
       });
@@ -71,7 +75,7 @@ api.post("/register", (req, res) => {
                     token,
                     user: {
                       id: user._id,
-                      login: user.login,
+                      // login: user.login,
                       email: user.email,
                     },
                   });

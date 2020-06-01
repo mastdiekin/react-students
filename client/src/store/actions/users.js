@@ -106,7 +106,7 @@ export const logout = () => {
 
 //register start
 export const registerSubmit = (data) => {
-  //   axios...
+  //axios
 };
 
 export const successRegisterUser = (data) => {

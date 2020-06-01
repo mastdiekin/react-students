@@ -19,9 +19,9 @@ class AuthForm extends Component {
       this.props.onLoginSubmit(data);
     }
 
-    // if(this.state.type === 'register') {
-    //   this.props.onRegisterSubmit(data)
-    // }
+    if (this.state.type === "register") {
+      this.props.onRegisterSubmit(data);
+    }
   };
 
   onChange = (e) => {
