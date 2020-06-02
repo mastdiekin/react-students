@@ -1,6 +1,7 @@
 const express = require("express");
 const api = express.Router();
 const Student = require("../models/Student");
+const User = require("../models/User");
 const auth = require("../middleware/auth");
 
 //GET Students
@@ -24,25 +25,36 @@ api.post("/add", auth, (req, res) => {
   if (req.body.newstudent) {
     req.body = req.body.newstudent;
   }
-  const student = new Student({
-    age: req.body.age,
-    name: req.body.name,
-    lName: req.body.lName,
-    year: req.body.year,
-    dateReceipt: req.body.dateReceipt,
-    faculty: req.body.faculty,
-    course: req.body.course,
-    phone: req.body.phone,
-    photo: req.body.photo,
-    address: req.body.address,
-    // userId: req.user, //ВЕРНУТЬ КОГДА БУДУТ ПОЛЬЗОВАТЕЛИ
-  });
-  return student
-    .save()
-    .then((result) => {
-      return res.json(result);
-    })
+  //found user by received decoded in middleware/auth.js
+  User.findOne({ _id: req.user.id })
+    .then((user) => {
+      if (!user) {
+        return res.status(400).send({
+          error: true,
+          message: "Author not found",
+        });
+      }
+      const student = new Student({
+        age: req.body.age,
+        name: req.body.name,
+        lName: req.body.lName,
+        year: req.body.year,
+        dateReceipt: req.body.dateReceipt,
+        faculty: req.body.faculty,
+        course: req.body.course,
+        phone: req.body.phone,
+        photo: req.body.photo,
+        address: req.body.address,
+        userId: user,
+      });
+      return student
+        .save()
+        .then((result) => {
+          return res.json(result);
+        })
 
+        .catch((err) => res.status(400).send(err));
+    })
     .catch((err) => res.status(400).send(err));
 });
 
@@ -52,24 +64,34 @@ api.post("/:id/edit", auth, (req, res) => {
     req.body = req.body.data;
   }
   const id = req.params.id;
-  Student.findOne({ id: id })
-    .then((student) => {
-      student.age = req.body.age;
-      student.name = req.body.name;
-      student.lName = req.body.lName;
-      student.year = req.body.year;
-      student.dateReceipt = req.body.dateReceipt;
-      student.faculty = req.body.faculty;
-      student.course = req.body.course;
-      student.phone = req.body.phone;
-      student.photo = req.body.photo;
-      student.address = req.body.address;
-      return student.save();
-    })
-    .then((result) => {
-      res.json(result);
-    })
-    .catch((err) => res.status(400).send(err));
+  //found user by received decoded in middleware/auth.js
+  User.findOne({ _id: req.user.id }).then((user) => {
+    if (!user) {
+      return res.status(400).send({
+        error: true,
+        message: "Author not found",
+      });
+    }
+    Student.findOne({ id: id })
+      .then((student) => {
+        student.age = req.body.age;
+        student.name = req.body.name;
+        student.lName = req.body.lName;
+        student.year = req.body.year;
+        student.dateReceipt = req.body.dateReceipt;
+        student.faculty = req.body.faculty;
+        student.course = req.body.course;
+        student.phone = req.body.phone;
+        student.photo = req.body.photo;
+        student.address = req.body.address;
+        student.userId = user;
+        return student.save();
+      })
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((err) => res.status(400).send(err));
+  });
 });
 
 //POST Delete student
