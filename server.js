@@ -6,6 +6,12 @@ const cors = require("cors");
 const path = require("path");
 const config = require("config");
 
+// need add config file in /config/default.json
+// {
+//   "mongoURI": "YOUR_CONNECT_TO_DATABASE",
+//   "jwtSecret": "YOUR_SECRET"
+// }
+
 //db
 const db = config.get("mongoURI");
 
