@@ -106,7 +106,30 @@ export const logout = () => {
 
 //register start
 export const registerSubmit = (data) => {
-  //axios
+  return (dispatch) => {
+    dispatch(startRegisterUser());
+    const body = JSON.stringify({ data });
+    axios
+      .post(api + "/users/register", body, axiosDataConfig)
+      .then((response) => {
+        if (!response.data.error) {
+          dispatch(successRegisterUser(response.data));
+        } else {
+          dispatch(registerError(response.data.error, response.data.message));
+        }
+      })
+      .catch((err) => {
+        dispatch(
+          registerError(err.response.data.error, err.response.data.message)
+        );
+      });
+  };
+};
+
+export const startRegisterUser = () => {
+  return {
+    type: actionTypes.REGISTER_START,
+  };
 };
 
 export const successRegisterUser = (data) => {
@@ -117,10 +140,11 @@ export const successRegisterUser = (data) => {
   };
 };
 
-export const registerError = (error) => {
+export const registerError = (error, errorMessage) => {
   return {
     type: actionTypes.REGISTER_ERROR,
     error,
+    errorMessage,
   };
 };
 //register end

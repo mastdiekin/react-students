@@ -23,6 +23,9 @@ const auth = require("../middleware/auth");
 
 //POST Register user
 api.post("/register", (req, res) => {
+  if (req.body.data) {
+    req.body = req.body.data;
+  }
   const {
     // login,
     email,
@@ -30,7 +33,7 @@ api.post("/register", (req, res) => {
   } = req.body;
 
   if (!email || !password) {
-    return res.status(400).send({
+    return res.send({
       error: true,
       message: "All fields required!",
     });
@@ -43,7 +46,7 @@ api.post("/register", (req, res) => {
   User.findOne({ email: email })
     .then((user) => {
       if (user) {
-        return res.status(400).send({
+        return res.send({
           error: true,
           message: "This email already exists!",
         });
@@ -97,7 +100,7 @@ api.post("/login", (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).send({
+    return res.send({
       error: true,
       message: "All fields required!",
     });

@@ -33,7 +33,8 @@ class Student extends Component {
 
   render() {
     let typeClass = classes.Student__info;
-    let buttons = (
+
+    let buttons = this.props.isAuth ? (
       <div className={classes.Student__buttons}>
         <EditStudent id={this.props.data.id} />
         <button
@@ -42,7 +43,8 @@ class Student extends Component {
           onClick={() => this.props.onDelete(this.props.data.id)}
         ></button>
       </div>
-    );
+    ) : null;
+
     let expand = this.state.isOpened ? (
       <div className={classes.Student__expand}>
         <div className="row">
@@ -146,6 +148,7 @@ const mapStateToProps = (state) => {
     students: state.students.students,
     loading: state.students.loading,
     sortParams: state.students.sortParams,
+    isAuth: state.users.isAuthenticated,
   };
 };
 

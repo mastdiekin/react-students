@@ -11,6 +11,7 @@ import thunk from "redux-thunk";
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import studentsStore from "./store/reducers/students";
 import usersStore from "./store/reducers/users";
+import { createLogger } from "redux-logger";
 
 const composeEnhancers =
   process.env.NODE_ENV === "development"
@@ -22,9 +23,15 @@ const rootReducer = combineReducers({
   users: usersStore,
 });
 
+const logger = createLogger({
+  diff: true,
+  duration: true,
+});
+
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  // applyMiddleware(logger),
+  composeEnhancers(applyMiddleware(thunk, logger))
 );
 
 ReactDOM.render(

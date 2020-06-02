@@ -69,7 +69,9 @@ export const newStudent = (newstudent) => {
         dispatch(newStudentSuccess(response.data));
       })
       .catch((err) => {
-        dispatch(newStudentError(err.response.message));
+        dispatch(
+          newStudentError(err.response.data.error, err.response.data.message)
+        );
       });
   };
 };
@@ -81,10 +83,11 @@ export const newStudentSuccess = (newstudent) => {
   };
 };
 
-export const newStudentError = (error) => {
+export const newStudentError = (error, errorMessage) => {
   return {
     type: actionTypes.ADD_STUDENT_ERROR,
     error,
+    errorMessage,
   };
 };
 //newStudent end
@@ -98,7 +101,9 @@ export const deleteStudent = (id) => {
         dispatch(deleteStudentSuccess(response.data));
       })
       .catch((err) => {
-        dispatch(deleteStudentError(err.response.message));
+        dispatch(
+          deleteStudentError(err.response.data.error, err.response.data.message)
+        );
       });
   };
 };
@@ -110,10 +115,11 @@ export const deleteStudentSuccess = (deletedStudent) => {
   };
 };
 
-export const deleteStudentError = (error) => {
+export const deleteStudentError = (error, errorMessage) => {
   return {
     type: actionTypes.DELETE_STUDENT_ERROR,
     error,
+    errorMessage,
   };
 };
 
@@ -136,7 +142,9 @@ export const editStudentSubmit = (id, data) => {
         dispatch(editStudentSuccess(id, newData));
       })
       .catch((err) => {
-        dispatch(editStudentError(err.response.message));
+        dispatch(
+          editStudentError(err.response.data.error, err.response.data.message)
+        );
       });
   };
 };
@@ -149,9 +157,10 @@ export const editStudentSuccess = (id, data) => {
   };
 };
 
-export const editStudentError = (error) => {
+export const editStudentError = (error, errorMessage) => {
   return {
     type: actionTypes.EDIT_STUDENT_ERROR,
     error,
+    errorMessage,
   };
 };

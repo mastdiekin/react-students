@@ -20,7 +20,7 @@ api.get("/:id", (req, res) => {
 
 //POST Add new student
 // api.post("/add", auth, (req, res) => {
-api.post("/add", (req, res) => {
+api.post("/add", auth, (req, res) => {
   if (req.body.newstudent) {
     req.body = req.body.newstudent;
   }
@@ -47,7 +47,7 @@ api.post("/add", (req, res) => {
 });
 
 //POST Edit student
-api.post("/:id/edit", (req, res) => {
+api.post("/:id/edit", auth, (req, res) => {
   if (req.body.data) {
     req.body = req.body.data;
   }
@@ -73,7 +73,7 @@ api.post("/:id/edit", (req, res) => {
 });
 
 //POST Delete student
-api.post("/:id/delete", (req, res) => {
+api.post("/:id/delete", auth, (req, res) => {
   const id = req.params.id;
   Student.findOneAndRemove({ id: id })
     .then((result) => res.json(result))
