@@ -36,7 +36,8 @@ const App = (props) => {
       <Wrapper>
         <Switch location={background || location}>
           <Route exact path="/" children={<Home />} />
-          <Route path="/students" children={<Students />} />
+          <Route path={"/students/page/:num"} component={Students} />
+          <Route path="/students" component={Students} />
           <Route path="/auth" children={<Auth />} />
           {/* {props.users.user ? (
             <MyRedirect to="/" redirectHistory={history} />

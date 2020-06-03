@@ -14,7 +14,11 @@ import Pagination from "../../UI/Pagination/Pagination";
 
 class Students extends Component {
   componentDidMount() {
-    this.props.onInitStudents();
+    let page;
+    this.props.match === undefined
+      ? (page = 1)
+      : (page = this.props.match.params.num);
+    this.props.onInitStudents(page);
     document.title = "Students";
   }
 
@@ -62,6 +66,11 @@ class Students extends Component {
       createMapStudents = <Spinner />;
     }
 
+    let history;
+    this.props.history !== undefined
+      ? (history = this.props.history)
+      : (history = null);
+
     return (
       <Aux>
         <Header />
@@ -72,7 +81,7 @@ class Students extends Component {
                 <div className="Students">
                   {staticStudentsTable}
                   {createMapStudents}
-                  <Pagination />
+                  <Pagination history={history} />
                 </div>
               </div>
             </div>
@@ -93,7 +102,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onInitStudents: () => dispatch(actions.initStudents()),
+    onInitStudents: (page) => dispatch(actions.initStudents(page)),
   };
 };
 

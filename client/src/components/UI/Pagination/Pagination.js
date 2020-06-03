@@ -4,6 +4,11 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 
 class Pagination extends Component {
+  constructor(props) {
+    super(props);
+    this.slug = "/students/page/";
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return nextProps.students !== this.props.students;
   }
@@ -19,7 +24,7 @@ class Pagination extends Component {
 
     let p = [];
     for (let page = 1; page <= copyStudentsData.lastPage; page++) {
-      const currPage = "/page/" + page;
+      const currPage = this.slug + page;
       const disabled = copyStudentsData.currentPage === page ? true : null;
       p.push(
         <li key={page}>
@@ -44,7 +49,7 @@ class Pagination extends Component {
       return hasNextPage ? (
         <li key={copyStudentsData.nextPage}>
           <a
-            href={"/page/" + copyStudentsData.nextPage}
+            href={this.slug + copyStudentsData.nextPage}
             onClick={(e) => this.clicked(e, copyStudentsData.nextPage, null)}
           >
             Вперед
@@ -59,7 +64,7 @@ class Pagination extends Component {
       return hasPrevPage ? (
         <li key={copyStudentsData.prevPage}>
           <a
-            href={"/page/" + copyStudentsData.prevPage}
+            href={this.slug + copyStudentsData.prevPage}
             onClick={(e) => this.clicked(e, copyStudentsData.prevPage, null)}
           >
             Назад
@@ -81,6 +86,7 @@ class Pagination extends Component {
 
   clicked = (e, pageNum, status) => {
     e.preventDefault();
+    this.props.history.push(this.slug + pageNum);
     // this.setState({
     //   currentPage: pageNum,
     // });
