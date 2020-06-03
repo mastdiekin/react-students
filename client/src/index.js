@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
 });
 
 const logger = createLogger({
-  diff: true,
+  // diff: true,
   duration: true,
 });
 

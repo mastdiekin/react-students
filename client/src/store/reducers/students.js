@@ -2,7 +2,7 @@ import * as actions from "../actions/actionTypes";
 import { orderBy } from "lodash";
 
 const initStore = {
-  students: [],
+  students: null,
   loading: false,
   error: false,
 };
@@ -14,6 +14,14 @@ const studentsStore = (state = initStore, action) => {
         ...state,
         loading: true,
         error: false,
+        currentPage: 1,
+        hasNextPage: null,
+        hasPrevPage: null,
+        nextPage: null,
+        prevPage: 0,
+        lastPage: null,
+        totalItems: null,
+        postsPerPage: null,
       };
     case actions.SUCCESS_STUDENTS:
       return {
@@ -21,6 +29,14 @@ const studentsStore = (state = initStore, action) => {
         students: action.data,
         loading: false,
         error: false,
+        currentPage: action.currentPage,
+        hasNextPage: action.hasNextPage,
+        hasPrevPage: action.hasPrevPage,
+        nextPage: action.nextPage,
+        prevPage: action.prevPage,
+        lastPage: action.lastPage,
+        totalItems: action.totalItems,
+        postsPerPage: action.postsPerPage,
       };
     case actions.SORT_STUDENTS:
       return {

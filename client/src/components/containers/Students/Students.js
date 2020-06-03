@@ -10,6 +10,7 @@ import misc from "../../../assets/sass/misc.sass";
 import Spinner from "../../UI/Spinner/Spinner";
 import Modal from "../../UI/Modal/Modal";
 import Input from "../../UI/Input/Input";
+import Pagination from "../../UI/Pagination/Pagination";
 
 class Students extends Component {
   componentDidMount() {
@@ -71,6 +72,7 @@ class Students extends Component {
                 <div className="Students">
                   {staticStudentsTable}
                   {createMapStudents}
+                  <Pagination />
                 </div>
               </div>
             </div>

@@ -4,11 +4,37 @@ const Student = require("../models/Student");
 const User = require("../models/User");
 const auth = require("../middleware/auth");
 
-//GET Students
-api.get("/", (req, res) => {
+const ITEMS_PER_PAGE = 5;
+
+//POST Students
+api.post("/", (req, res) => {
+  // console.log("Current page", req.body.page);
+  const page = +req.body.page || 1;
+
+  let totalItems;
+
   Student.find()
-    .then((data) => res.json(data))
-    .catch((err) => res.status(400).render(err));
+    .countDocuments()
+    .then((numOfStudents) => {
+      totalItems = numOfStudents;
+      return Student.find()
+        .skip((page - 1) * ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE);
+    })
+    .then((students) => {
+      res.json({
+        data: students,
+        currentPage: page,
+        hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+        hasPrevPage: page > 1,
+        nextPage: page + 1,
+        prevPage: page - 1,
+        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
+        postsPerPage: ITEMS_PER_PAGE,
+        totalItems,
+      });
+    })
+    .catch((err) => console.log(err));
 });
 
 //GET Student by ID

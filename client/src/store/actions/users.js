@@ -1,6 +1,7 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import { api } from "../../components/hoc/shared/utility";
+import store from "../reducers/users";
 
 const axiosDataConfig = {
   headers: {
@@ -16,7 +17,7 @@ export const initAuthUser = (token) => {
       .post(api + "/users/user", null, {
         headers: {
           "Content-Type": "application/json",
-          "x-auth-token": token,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
@@ -32,6 +33,7 @@ export const successAuthUser = (user) => {
   return {
     type: actionTypes.USER_LOADED,
     user,
+    token: localStorage.getItem("token"),
   };
 };
 
@@ -46,6 +48,7 @@ export const authUserError = (error) => {
   return {
     type: actionTypes.AUTH_ERROR,
     error,
+    token: null,
   };
 };
 
@@ -82,6 +85,7 @@ export const successLoginUser = (data) => {
   return {
     type: actionTypes.LOGIN_SUCCESS,
     data,
+    token: data.token,
   };
 };
 
@@ -91,6 +95,7 @@ export const loginError = (error, errorMessage) => {
     type: actionTypes.LOGIN_ERROR,
     error,
     errorMessage,
+    token: null,
   };
 };
 //login end
@@ -100,6 +105,7 @@ export const logout = () => {
   localStorage.removeItem("token");
   return {
     type: actionTypes.LOGOUT_SUCCESS,
+    token: null,
   };
 };
 //logout end
@@ -137,6 +143,7 @@ export const successRegisterUser = (data) => {
   return {
     type: actionTypes.REGISTER_SUCCESS,
     data,
+    token: data.token,
   };
 };
 
@@ -145,6 +152,7 @@ export const registerError = (error, errorMessage) => {
     type: actionTypes.REGISTER_ERROR,
     error,
     errorMessage,
+    token: null,
   };
 };
 //register end

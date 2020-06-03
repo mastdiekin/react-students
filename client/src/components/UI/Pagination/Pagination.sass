@@ -1,0 +1,28 @@
+@import '../../../assets/sass/helpers/_mixins'
+@import '../../../assets/sass/src/_color'
+@import '../../../assets/sass/src/_vars'
+@import '../../../assets/sass/src/_extends'
+    
+.Pagination
+    text-align: center
+    padding: 15px
+    ul
+        display: flex
+        justify-content: center
+        align-items: center
+        li
+            margin-right: 5px
+            &:last-child
+                margin-right: 0
+            a
+                display: block
+                padding: 5px 13px
+                background: $students-brand
+                color: $w
+                border-radius: 4px
+                border: 1px solid transparent
+                &:hover,
+                &.active
+                    border-color: $students-brand
+                    color: $students-brand
+                    background: transparent
