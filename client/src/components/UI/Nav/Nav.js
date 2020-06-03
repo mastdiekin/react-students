@@ -9,7 +9,9 @@ const Nav = (props) => {
   const clicked = (e) => {
     e.preventDefault();
     history.push("/students");
-    props.onInitStudents(1);
+    if (!props.loading) {
+      props.onInitStudents(1);
+    }
   };
 
   return (

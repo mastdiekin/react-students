@@ -18,7 +18,9 @@ class Students extends Component {
     this.props.match === undefined
       ? (page = 1)
       : (page = this.props.match.params.num);
-    this.props.onInitStudents(page);
+    if (!this.props.loading) {
+      this.props.onInitStudents(page);
+    }
     document.title = "Students";
   }
 
