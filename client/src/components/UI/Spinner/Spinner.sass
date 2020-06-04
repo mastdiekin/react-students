@@ -1,95 +1,84 @@
 .Spinner
-	height: 50px
-	width: 50px
-	left: 50%
-	transform: translate(-50%, 0)
+	animation: rotator 1.4s linear infinite
+	height: 65px
+	width: 65px
+	left: calc(50% - 33px)
 	position: absolute
 	border-radius: 50%
+	&.relative
+		position: relative !important
+	&.no__transform
+		transform: translate(0, 0) !important
+	&.no__left
+		left: auto !important
 
-	&:after
-		content: ""
-		position: absolute
-		width: 43.5px
-		height: 43.5px
-		left: 0px
-		top: 0px
-		margin: 3.2px
-		background: #fff
-		opacity: 1
-		border-radius: 999px
-
-	.side
-		height: 50px
-		width: 25px
-		position: absolute
-		overflow: hidden
-		top: 0
-
-		> .fill
-			position: absolute
-			width: 50px
-			height: 50px
-			background: #09c
-			border-radius: 999px
-			animation: cssSpinnerRight 2s infinite linear
-
-		&.sp_right
-			left: 25px
-			border-radius: 0px 999px 999px 0px
-
-			> .fill
-				right: 0
-				border-right: 25px solid #fff
-
-		&.sp_left
-			left: 0
-			border-radius: 999px 0px 0px 999px
-
-			> .fill
-				left: 0
-				border-left: 25px solid #fff
-				animation: cssSpinnerLeft 2s infinite linear
-
-@keyframes cssSpinnerRight
+@keyframes rotator
 	0%
 		transform: rotate(0deg)
 
-	20%
-		transform: rotate(90deg)
-
-	25%
-		transform: rotate(180deg)
-
-	50%
-		transform: rotate(180deg)
-
-	70%
+	100%
 		transform: rotate(270deg)
 
-	75%
-		transform: rotate(360deg)
+.path
+	stroke-dasharray: 187
+	stroke-dashoffset: 0
+	transform-origin: center
+	animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite
+	&.white
+		animation: dash 1.4s ease-in-out infinite, colorsWhite 5.6s ease-in-out infinite
 
-	100%
-		transform: rotate(360deg)
-
-@keyframes cssSpinnerLeft
+@keyframes colors
 	0%
-		transform: rotate(0deg)
+		stroke: #4285F4
 
 	25%
-		transform: rotate(0deg)
-
-	35%
-		transform: rotate(90deg)
+		stroke: #09c
 
 	50%
-		transform: rotate(180deg)
+		stroke: #4285F4
 
 	75%
-		transform: rotate(180deg)
-
-	80%
-		transform: rotate(270deg)
+		stroke: #09c
 
 	100%
-		transform: rotate(360deg)
+		stroke: #4285F4
+
+@keyframes colorsWhite
+	0%
+		stroke: #fff
+
+	25%
+		stroke: #09c
+
+	50%
+		stroke: #fff
+
+	75%
+		stroke: #09c
+
+	100%
+		stroke: #fff
+
+@-webkit-keyframes dash
+	0%
+		stroke-dashoffset: 187
+
+	50%
+		stroke-dashoffset: 46.75
+		transform: rotate(135deg)
+
+	100%
+		stroke-dashoffset: 187
+		transform: rotate(450deg)
+
+@keyframes dash
+	0%
+		stroke-dashoffset: 187
+
+	50%
+		stroke-dashoffset: 46.75
+		transform: rotate(135deg)
+
+	100%
+		stroke-dashoffset: 187
+		transform: rotate(450deg)

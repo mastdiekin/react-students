@@ -48,9 +48,16 @@ class Student extends Component {
     let expand = this.state.isOpened ? (
       <div className={classes.Student__expand}>
         <div className="row">
-          <div className="col-12">
-            <div className="address">{this.props.data.address}</div>
-            <div className="phone">{this.props.data.phone}</div>
+          <div className="col-8">
+            <div className={classes.Student__expand__leftInfo}>
+              <div className="address">{this.props.data.address}</div>
+              <div className="phone">{this.props.data.phone}</div>
+            </div>
+          </div>
+          <div className="col-4">
+            <div className={classes.Student__expand__rightInfo}>
+              <img src={this.props.data.photo} alt="" />
+            </div>
           </div>
         </div>
       </div>

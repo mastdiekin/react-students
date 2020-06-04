@@ -15,6 +15,7 @@ import UserAuth from "./userAuth";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import MyRedirect from "./components/UI/MyRedirect/MyRedirect";
+import Alert from "./components/UI/Alert/Alert";
 
 const App = (props) => {
   let location = useLocation();
@@ -34,6 +35,12 @@ const App = (props) => {
     <div className="App" style={{ height: "100%" }}>
       <UserAuth />
       <Wrapper>
+        <Alert
+          show={props.studentsErrorMessage || props.usersErrorMessage}
+          type="error"
+        >
+          {props.studentsErrorMessage || props.usersErrorMessage}
+        </Alert>
         <Switch location={background || location}>
           <Route exact path="/" children={<Home />} />
           <Route path={"/students/page/:num"} component={Students} />
@@ -56,6 +63,8 @@ const mapStateToProps = (state) => {
   return {
     users: state.users,
     loading: state.users.loading,
+    studentsErrorMessage: state.students.errorMessage,
+    usersErrorMessage: state.users.errorMessage,
   };
 };
 export default compose(withRouter, connect(mapStateToProps))(App);

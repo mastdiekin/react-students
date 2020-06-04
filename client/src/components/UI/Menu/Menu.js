@@ -26,7 +26,7 @@ const Menu = (props) => {
     );
   } else {
     if (props.users.loading) {
-      isLoggedinCanUseThis = <Spinner customClass={classes.spinner} />;
+      isLoggedinCanUseThis = <Spinner white />;
     } else {
       isLoggedinCanUseThis = (
         <Aux>

@@ -67,6 +67,7 @@ const studentsStore = (state = initStore, action) => {
         loading: false,
         closeModal: false,
         error: true,
+        errorMessage: action.errorMessage,
       };
     case actions.DELETE_STUDENT_SUCCESS:
       return {
@@ -80,6 +81,7 @@ const studentsStore = (state = initStore, action) => {
         ...state,
         loading: false,
         error: true,
+        errorMessage: action.errorMessage,
       };
     case actions.EDIT_STUDENT_START:
       return {
@@ -102,6 +104,15 @@ const studentsStore = (state = initStore, action) => {
         loading: false,
         closeModal: false,
         error: true,
+        errorMessage: action.errorMessage,
+      };
+    case actions.CLEAR_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        error: false,
+        errorMessage: null,
       };
     default:
       return state;

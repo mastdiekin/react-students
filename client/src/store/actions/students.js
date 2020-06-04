@@ -169,9 +169,7 @@ export const editStudentSubmit = (id, data) => {
         dispatch(editStudentSuccess(id, newData));
       })
       .catch((err) => {
-        dispatch(
-          editStudentError(err.response.data.error, err.response.data.message)
-        );
+        dispatch(editStudentError(true, err.response.data.message));
       });
   };
 };
@@ -189,5 +187,11 @@ export const editStudentError = (error, errorMessage) => {
     type: actionTypes.EDIT_STUDENT_ERROR,
     error,
     errorMessage,
+  };
+};
+
+export const clearStudentError = () => {
+  return {
+    type: actionTypes.CLEAR_ERROR,
   };
 };

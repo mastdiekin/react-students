@@ -65,7 +65,7 @@ class Students extends Component {
     }
 
     if (this.props.loading) {
-      createMapStudents = <Spinner />;
+      createMapStudents = <Spinner relative />;
     }
 
     let history;

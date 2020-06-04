@@ -156,3 +156,11 @@ export const registerError = (error, errorMessage) => {
   };
 };
 //register end
+
+export const clearUsersError = () => {
+  return {
+    type: actionTypes.CLEAR_ERROR,
+    error: null,
+    errorMessage: null,
+  };
+};

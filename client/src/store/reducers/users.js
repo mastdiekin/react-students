@@ -58,6 +58,14 @@ const usersStore = (state = initStore, action) => {
         error: false,
         errorMessage: null,
       };
+    case actions.CLEAR_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        error: false,
+        errorMessage: null,
+      };
     default:
       return state;
   }

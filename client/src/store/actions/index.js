@@ -8,6 +8,7 @@ export {
   sortStudents,
   newStudent,
   newStudentError,
+  clearStudentError,
 } from "../actions/students";
 
 export {
@@ -19,4 +20,5 @@ export {
   registerError,
   loginError,
   logout,
+  clearUsersError,
 } from "../actions/users";
