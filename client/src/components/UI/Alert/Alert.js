@@ -3,6 +3,7 @@ import "./Alert.css";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import * as actions from "../../../store/actions";
 import { connect } from "react-redux";
+import classes from "./Alert.sass";
 
 class Alert extends Component {
   shouldComponentUpdate(nextProps, nextState) {

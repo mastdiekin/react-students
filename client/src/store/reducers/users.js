@@ -12,10 +12,15 @@ const initStore = {
 const usersStore = (state = initStore, action) => {
   switch (action.type) {
     case actions.USER_LOADING:
-    case actions.LOGIN_START:
       return {
         ...state,
         loading: true,
+        error: false,
+      };
+    case actions.LOGIN_START:
+      return {
+        ...state,
+        loading: false,
         error: false,
       };
     case actions.USER_LOADED:
