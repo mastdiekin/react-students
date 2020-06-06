@@ -16,6 +16,12 @@ class StudentSingle extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.props.students) {
+      document.title = `${this.props.students.name} ${this.props.students.lName}`;
+    }
+  }
+
   render() {
     let getDataStudent;
     if (this.props.students) {
