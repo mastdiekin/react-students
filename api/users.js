@@ -1,10 +1,12 @@
 const express = require("express");
 const api = express.Router();
 const User = require("../models/User");
+const Role = require("../models/Role");
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
+const mongoose = require("mongoose");
 
 // //GET Users
 // api.get("/", auth, (req, res) => {
@@ -74,14 +76,24 @@ api.post("/register", (req, res) => {
                 },
                 (err, token) => {
                   if (err) throw err;
-                  res.json({
-                    token,
-                    user: {
-                      id: user._id,
-                      // login: user.login,
-                      email: user.email,
-                    },
-                  });
+                  Role.findById(user.role)
+                    .then((role) => {
+                      res.json({
+                        token,
+                        user: {
+                          id: user._id,
+                          // login: user.login,
+                          email: user.email,
+                          role: role,
+                        },
+                      });
+                    })
+                    .catch((err) => {
+                      return res.send({
+                        error: true,
+                        message: "Role not found!",
+                      });
+                    });
                 }
               );
             })
@@ -134,14 +146,25 @@ api.post("/login", (req, res) => {
             },
             (err, token) => {
               if (err) throw err;
-              res.json({
-                token,
-                user: {
-                  id: user._id,
-                  login: user.login,
-                  email: user.email,
-                },
-              });
+
+              Role.findById(user.role)
+                .then((role) => {
+                  res.json({
+                    token,
+                    user: {
+                      id: user._id,
+                      login: user.login,
+                      email: user.email,
+                      role: role,
+                    },
+                  });
+                })
+                .catch((err) => {
+                  return res.send({
+                    error: true,
+                    message: "Role not found!",
+                  });
+                });
             }
           );
         })

@@ -5,6 +5,7 @@ const usersApi = require("./api/users");
 const cors = require("cors");
 const path = require("path");
 const config = require("config");
+const Role = require("./models/Role");
 
 // need add config file in /config/default.json
 // {
@@ -32,6 +33,21 @@ mongoose
     useCreateIndex: true,
   })
   .then(() => console.log("MongoDB Connected..."))
+  .then(() => {
+    Role.findOne({ type: "administrator" }).then((role) => {
+      if (!role) {
+        const role = new Role({
+          type: "administrator",
+          caps: {
+            canEdit: true,
+            canAdd: true,
+            canDelete: true,
+          },
+        });
+        role.save();
+      }
+    });
+  })
   .catch((err) => console.log(err));
 
 if (process.env.NODE_ENV === "production") {
@@ -40,6 +56,21 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
+
+app.use((req, res, next) => {
+  Role.findOne({ type: "user" })
+    .then((role) => {
+      req.role = role;
+      next();
+    })
+    .catch((err) => console.log(err));
+  // User.findById("5ed16833e7fc0f59639d9ac9")
+  //   .then((user) => {
+  //     req.user = user;
+  //     next();
+  //   })
+  //   .catch((err) => console.log(err));
+});
 
 const port = process.env.PORT || 5000;
 

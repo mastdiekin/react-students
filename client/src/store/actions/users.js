@@ -118,6 +118,7 @@ export const registerSubmit = (data) => {
     axios
       .post(api + "/users/register", body, axiosDataConfig)
       .then((response) => {
+        console.log(response);
         if (!response.data.error) {
           dispatch(successRegisterUser(response.data));
         } else {
