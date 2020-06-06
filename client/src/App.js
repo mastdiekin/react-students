@@ -16,6 +16,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import MyRedirect from "./components/UI/MyRedirect/MyRedirect";
 import Alert from "./components/UI/Alert/Alert";
+import StudentSingle from "./components/containers/Students/StudentSingle/StudentSingle";
 
 const App = (props) => {
   let location = useLocation();
@@ -44,6 +45,7 @@ const App = (props) => {
         <Switch location={background || location}>
           <Route exact path="/" children={<Home />} />
           <Route path={"/students/page/:num"} component={Students} />
+          <Route path={"/students/:id"} component={StudentSingle} />
           <Route path="/students" component={Students} />
           <Route path="/auth" children={<Auth />} />
           {/* {props.users.user ? (

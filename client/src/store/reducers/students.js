@@ -9,6 +9,19 @@ const initStore = {
 
 const studentsStore = (state = initStore, action) => {
   switch (action.type) {
+    case actions.START_STUDENT_INSIDE:
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    case actions.SUCCESS_STUDENT_INSIDE:
+      return {
+        ...state,
+        students: action.data,
+        loading: false,
+        error: false,
+      };
     case actions.START_STUDENTS:
       return {
         ...state,

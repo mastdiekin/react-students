@@ -12,6 +12,31 @@ let axiosDataConfig = {
   },
 };
 
+//student inside start
+export const initStudentInside = (id) => {
+  return (dispatch) => {
+    dispatch(startStudentInside());
+    axios
+      .get(api + "/students/" + id, { id })
+      .then((response) => {
+        dispatch(successStudentInside(response.data));
+      })
+      .catch((err) => console.log(err));
+  };
+};
+export const startStudentInside = () => {
+  return {
+    type: actionTypes.START_STUDENT_INSIDE,
+  };
+};
+export const successStudentInside = (data) => {
+  return {
+    type: actionTypes.SUCCESS_STUDENT_INSIDE,
+    data: data,
+  };
+};
+//student inside end
+
 export const initStudents = (page = 1) => {
   return (dispatch) => {
     dispatch(startStudents());

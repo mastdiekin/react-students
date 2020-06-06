@@ -4,6 +4,7 @@ import misc from "../../../../assets/sass/misc.sass";
 import * as actions from "../../../../store/actions";
 import { connect } from "react-redux";
 import EditStudent from "../../EditStudent/EditStudent";
+import { Link } from "react-router-dom";
 
 class Student extends Component {
   state = {
@@ -46,21 +47,23 @@ class Student extends Component {
     ) : null;
 
     let expand = this.state.isOpened ? (
-      <div className={classes.Student__expand}>
-        <div className="row">
-          <div className="col-8">
-            <div className={classes.Student__expand__leftInfo}>
-              <div className="address">{this.props.data.address}</div>
-              <div className="phone">{this.props.data.phone}</div>
+      <Link to={`/students/${this.props.data._id}`}>
+        <div className={classes.Student__expand}>
+          <div className="row">
+            <div className="col-8">
+              <div className={classes.Student__expand__leftInfo}>
+                <div className="address">{this.props.data.address}</div>
+                <div className="phone">{this.props.data.phone}</div>
+              </div>
             </div>
-          </div>
-          <div className="col-4">
-            <div className={classes.Student__expand__rightInfo}>
-              <img src={this.props.data.photo} alt="" />
+            <div className="col-4">
+              <div className={classes.Student__expand__rightInfo}>
+                <img src={this.props.data.photo} alt="" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     ) : null;
     if (this.props.type === "table") {
       typeClass = [classes.Student__info, classes.table].join(" ");

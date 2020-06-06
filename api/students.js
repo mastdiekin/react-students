@@ -40,7 +40,8 @@ api.post("/", (req, res) => {
 //GET Student by ID
 api.get("/:id", (req, res) => {
   const id = req.params.id;
-  Student.findOne({ id: id })
+  Student.findOne({ _id: id })
+    .select("-password")
     .then((data) => res.json(data))
     .catch((err) => res.status(400).json(err));
 });

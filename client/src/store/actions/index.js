@@ -1,4 +1,5 @@
 export {
+  initStudentInside,
   initStudents,
   deleteStudent,
   deleteStudentError,
