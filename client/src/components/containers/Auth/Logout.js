@@ -7,7 +7,7 @@ class Logout extends Component {
   render() {
     return (
       <Button clicked={this.props.onLogout}>
-        {this.props.users.user.email} Выход
+        {this.props.users.email} Выход
       </Button>
     );
   }
@@ -15,7 +15,7 @@ class Logout extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.users,
+    users: state.users.user.user,
     loading: state.users.loading,
   };
 };

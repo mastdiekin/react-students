@@ -24,20 +24,13 @@ const usersStore = (state = initStore, action) => {
         error: false,
       };
     case actions.USER_LOADED:
-      return {
-        ...state,
-        isAuthenticated: true,
-        loading: false,
-        user: action.user.data,
-        error: false,
-      };
     case actions.LOGIN_SUCCESS:
     case actions.REGISTER_SUCCESS:
       return {
         ...state,
-        ...action.data, //user и token
         isAuthenticated: true,
         loading: false,
+        user: action.data,
         error: false,
         errorMessage: null,
       };

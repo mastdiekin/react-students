@@ -1,5 +1,7 @@
 const config = require("config");
 const jwt = require("jsonwebtoken");
+const User = require("../models/User");
+const Role = require("../models/Role");
 
 const auth = (req, res, next) => {
   // const token = req.header("x-auth-token");
@@ -16,8 +18,23 @@ const auth = (req, res, next) => {
     const decoded = jwt.verify(token, config.get("jwtSecret"));
     //add user from payload
     req.user = decoded;
-    console.log("Decoded", decoded);
-    next();
+    console.log(decoded.id);
+    User.findById(decoded.id)
+      .then((user) => {
+        Role.findById(user.role.toString())
+          .then((role) => {
+            if (!role) {
+              return res.status(401).send({
+                error: true,
+                message: "Wrong role",
+              });
+            }
+            req.userRole = role;
+            next();
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
   } catch (e) {
     console.log("Catch error", req.headers.authorization);
     res.status(400).send({

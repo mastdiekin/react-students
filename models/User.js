@@ -23,7 +23,6 @@ const User = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Role",
     default: new mongoose.Types.ObjectId("5edb4b104be2e31103a26ea2"),
-    required: true,
   },
   resetToken: String,
   resetTokenExp: Date,

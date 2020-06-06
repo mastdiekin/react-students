@@ -77,6 +77,7 @@ api.post("/register", (req, res) => {
                 (err, token) => {
                   if (err) throw err;
                   Role.findById(user.role)
+                    .select("-_id")
                     .then((role) => {
                       res.json({
                         token,
@@ -148,6 +149,7 @@ api.post("/login", (req, res) => {
               if (err) throw err;
 
               Role.findById(user.role)
+                .select("-_id")
                 .then((role) => {
                   res.json({
                     token,
@@ -178,7 +180,25 @@ api.post("/user", auth, (req, res) => {
   User.findById(req.user.id)
     .select("-password")
     .then((user) => {
-      res.send(user);
+      Role.findById(user.role)
+        .select("-_id")
+        .then((role) => {
+          res.json({
+            user: {
+              id: user._id,
+              login: user.login,
+              email: user.email,
+              role: role,
+            },
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          return res.send({
+            error: true,
+            message: "Role not found!",
+          });
+        });
     });
 });
 

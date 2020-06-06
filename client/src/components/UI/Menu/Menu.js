@@ -7,6 +7,7 @@ import Aux from "../../hoc/Auxx/Auxx";
 import { connect } from "react-redux";
 import Spinner from "../../UI/Spinner/Spinner";
 import Logout from "../../containers/Auth/Logout";
+import AuthIcon from "../../containers/Auth/AuthIcon";
 
 const Menu = (props) => {
   let location = useLocation();
@@ -18,6 +19,9 @@ const Menu = (props) => {
       <Aux>
         <li>
           <AddNewStudent />
+        </li>
+        <li>
+          <AuthIcon />
         </li>
         <li>
           <Logout />

@@ -95,12 +95,9 @@ export const newStudentStart = () => {
 
 export const newStudent = (newstudent) => {
   return (dispatch, getState) => {
-    //сделаем проверку на наличии токена в локалсторадже. После авторизации на сайте, страница не обновляется (нас переносит на "/" роут), токен в локалсторадже обновляется, НО при попытке чтото удалить или изменить, токен равен null! Поэтому токен, полученный после авторизации записываем в стор, после чего тут заменяем.
-    //еще вариант, просто перезагрузить страницу пользователю.
-    if (!token) {
-      const { token } = getState().users;
-      axiosDataConfig.headers.Authorization = `Bearer ${token}`;
-    }
+    axiosDataConfig.headers.Authorization = `Bearer ${localStorage.getItem(
+      "token"
+    )}`;
     dispatch(newStudentStart());
     const body = JSON.stringify({ newstudent });
     axios
@@ -135,12 +132,9 @@ export const newStudentError = (error, errorMessage) => {
 export const deleteStudent = (id) => {
   return (dispatch, getState) => {
     const body = JSON.stringify({ id });
-    //сделаем проверку на наличии токена в локалсторадже. После авторизации на сайте, страница не обновляется (нас переносит на "/" роут), токен в локалсторадже обновляется, НО при попытке чтото удалить или изменить, токен равен null! Поэтому токен, полученный после авторизации записываем в стор, после чего тут заменяем.
-    //еще вариант, просто перезагрузить страницу пользователю.
-    if (!token) {
-      const { token } = getState().users;
-      axiosDataConfig.headers.Authorization = `Bearer ${token}`;
-    }
+    axiosDataConfig.headers.Authorization = `Bearer ${localStorage.getItem(
+      "token"
+    )}`;
     axios
       .post(api + "/students/" + id + "/delete", body, axiosDataConfig)
       .then((response) => {
@@ -177,12 +171,9 @@ export const editStudentStart = () => {
 
 export const editStudentSubmit = (id, data) => {
   return (dispatch, getState) => {
-    //сделаем проверку на наличии токена в локалсторадже. После авторизации на сайте, страница не обновляется (нас переносит на "/" роут), токен в локалсторадже обновляется, НО при попытке чтото удалить или изменить, токен равен null! Поэтому токен, полученный после авторизации записываем в стор, после чего тут заменяем.
-    //еще вариант, просто перезагрузить страницу пользователю.
-    if (!token) {
-      const { token } = getState().users;
-      axiosDataConfig.headers.Authorization = `Bearer ${token}`;
-    }
+    axiosDataConfig.headers.Authorization = `Bearer ${localStorage.getItem(
+      "token"
+    )}`;
     dispatch(editStudentStart());
     const body = JSON.stringify({ data });
     axios
@@ -194,7 +185,10 @@ export const editStudentSubmit = (id, data) => {
         dispatch(editStudentSuccess(id, newData));
       })
       .catch((err) => {
-        dispatch(editStudentError(true, err.response.data.message));
+        console.log(err.response);
+        dispatch(
+          editStudentError(err.response.data.error, err.response.data.message)
+        );
       });
   };
 };

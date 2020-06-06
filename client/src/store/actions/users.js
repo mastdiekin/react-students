@@ -21,7 +21,7 @@ export const initAuthUser = (token) => {
         },
       })
       .then((response) => {
-        dispatch(successAuthUser(response));
+        dispatch(successAuthUser(response.data));
       })
       .catch((err) => {
         dispatch(authUserError(err.response.message));
@@ -29,10 +29,10 @@ export const initAuthUser = (token) => {
   };
 };
 
-export const successAuthUser = (user) => {
+export const successAuthUser = (data) => {
   return {
     type: actionTypes.USER_LOADED,
-    user,
+    data,
     token: localStorage.getItem("token"),
   };
 };

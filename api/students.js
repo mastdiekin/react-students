@@ -49,6 +49,14 @@ api.get("/:id", (req, res) => {
 //POST Add new student
 // api.post("/add", auth, (req, res) => {
 api.post("/add", auth, (req, res) => {
+  if (!req.userRole.caps.canAdd) {
+    console.log("Permission denied", "ADD ACTION");
+    return res.status(400).send({
+      error: true,
+      message:
+        "Permission denied. You are a member of the group of users who are prohibited from this action.",
+    });
+  }
   if (req.body.newstudent) {
     req.body = req.body.newstudent;
   }
@@ -99,6 +107,14 @@ api.post("/:id/edit", auth, (req, res) => {
         message: "Author not found",
       });
     }
+    if (!req.userRole.caps.canEdit) {
+      console.log("Permission denied", "EDIT ACTION");
+      return res.status(400).send({
+        error: true,
+        message:
+          "Permission denied. You are a member of the group of users who are prohibited from this action.",
+      });
+    }
     Student.findOne({ id: id })
       .then((student) => {
         student.age = req.body.age;
@@ -124,6 +140,14 @@ api.post("/:id/edit", auth, (req, res) => {
 //POST Delete student
 api.post("/:id/delete", auth, (req, res) => {
   const id = req.params.id;
+  if (!req.userRole.caps.canDelete) {
+    console.log("Permission denied", "DELETE ACTION");
+    return res.status(400).send({
+      error: true,
+      message:
+        "Permission denied. You are a member of the group of users who are prohibited from this action.",
+    });
+  }
   Student.findOneAndRemove({ id: id })
     .then((result) => res.json(result))
     .catch((err) => res.status(400).send(err));
