@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import { Link } from "react-router-dom";
 import Aux from "../../hoc/Auxx/Auxx";
+import ScrollArea from "react-scrollbar";
 
 class Search extends Component {
   state = {
@@ -56,20 +57,24 @@ class Search extends Component {
       founded = "Не найдено";
     }
     return (
-      <Aux>
+      <ScrollArea
+        speed={0.8}
+        className={classes["Search__result-wrapper"]}
+        contentClassName="content"
+        horizontal={false}
+        smoothScrolling={true}
+      >
         <div
           className={classes.Search__overlay}
           onClick={this.clearSearchInput}
         ></div>
-        <div className={classes["Search__result-wrapper"]}>
-          <div className={classes.Search__found}>
-            {foundedStart}
-            {founded}
-            {foundedEnd}
-          </div>
-          {data}
+        <div className={classes.Search__found}>
+          {foundedStart}
+          {founded}
+          {foundedEnd}
         </div>
-      </Aux>
+        {data}
+      </ScrollArea>
     );
   };
 
