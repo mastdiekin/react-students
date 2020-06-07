@@ -18,22 +18,20 @@ class Search extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
-      nextProps.search.data !== this.state.data ||
-      nextState.data === nextProps.search.data
+      nextProps.search.data !== this.state.data
       //   nextState.data !== this.state.data
     );
   }
 
-  componentWillReceiveProps(nextState, nextProps) {
-    this.setState({ data: this.props.search.data });
-    // if (nextState.search.data) {
-    //   console.log(nextState.search.data);
-    // }
-  }
+  //   componentWillReceiveProps(nextState, nextProps) {
+  //     this.setState({ data: this.props.search.data });
+  //     // if (nextState.search.data) {
+  //     //   console.log(nextState.search.data);
+  //     // }
+  //   }
 
   componentDidUpdate = () => {
-    // console.log(this.state.data);
-    // this.setState({ data: this.props.search.data });
+    this.setState({ data: this.props.search.data });
     // if (!this.props.loading) {
     //   const receivedData = this.props.search.data;
     //   if (receivedData) {
