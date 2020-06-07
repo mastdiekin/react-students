@@ -21,10 +21,7 @@ class Search extends Component {
   };
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (
-      nextProps.search.data !== this.state.data
-      //   nextState.data !== this.state.data
-    );
+    return nextProps.search.data !== this.state.data;
   }
 
   componentDidUpdate = () => {
@@ -49,13 +46,15 @@ class Search extends Component {
   };
 
   render() {
-    let renderSearchData;
+    let renderSearchData = null;
     if (!this.props.loading) {
       let receivedData = this.state.data;
       if (receivedData) {
+        renderSearchData = [];
         receivedData.map((item) => {
-          renderSearchData = (
+          renderSearchData.push(
             <Link
+              key={item._id}
               to={`/students/${item._id}`}
               className={classes.Search__result}
               onClick={() => this.searchLinkClick(item._id)}
@@ -73,9 +72,10 @@ class Search extends Component {
           type="text"
           name="query"
           value={this.state.value}
+          placeholder="Поиск..."
           onChange={(e) => this.changeSearch(e)}
         />
-        {renderSearchData ? (
+        {renderSearchData && renderSearchData.length > 0 ? (
           <Aux>
             <div
               className={classes.Search__overlay}
