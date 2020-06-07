@@ -3,6 +3,7 @@ import { get } from "lodash";
 import { act } from "react-dom/test-utils";
 import axios from "axios";
 import { api } from "../../components/hoc/shared/utility";
+import openSocket from "socket.io-client";
 
 let token = localStorage.getItem("token");
 let axiosDataConfig = {
@@ -44,7 +45,7 @@ export const initStudents = (page = 1) => {
     axios
       .post(api + "/students", { page })
       .then((response) => {
-        dispatch(successStudents(response.data));
+        dispatch(successStudents(dispatch, response.data));
       })
       .catch((err) => console.log(err));
   };
@@ -56,7 +57,13 @@ export const startStudents = () => {
   };
 };
 
-export const successStudents = (data) => {
+export const successStudents = (dispatch, data) => {
+  const socket = openSocket("http://localhost:5000");
+  socket.on("students", (data) => {
+    if (data.action === "create") {
+      dispatch(newStudentSuccess(data.post));
+    }
+  });
   return {
     type: actionTypes.SUCCESS_STUDENTS,
     data: data.data,
@@ -103,7 +110,8 @@ export const newStudent = (newstudent) => {
     axios
       .post(api + "/students/add", body, axiosDataConfig)
       .then((response) => {
-        dispatch(newStudentSuccess(response.data));
+        console.log("DONE", response.data);
+        // dispatch(newStudentSuccess(response.data));
       })
       .catch((err) => {
         dispatch(

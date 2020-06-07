@@ -15,9 +15,9 @@ import searchStore from "./store/reducers/search";
 import { createLogger } from "redux-logger";
 
 const composeEnhancers =
-  process.env.NODE_ENV === "development"
+  (process.env.NODE_ENV === "development"
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : null || compose;
+    : null) || compose;
 
 const rootReducer = combineReducers({
   students: studentsStore,

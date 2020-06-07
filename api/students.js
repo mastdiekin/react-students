@@ -3,8 +3,9 @@ const api = express.Router();
 const Student = require("../models/Student");
 const User = require("../models/User");
 const auth = require("../middleware/auth");
+const io = require("../socket");
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 //POST Students
 api.post("/", (req, res) => {
@@ -106,6 +107,10 @@ api.post("/add", auth, (req, res) => {
       return student
         .save()
         .then((result) => {
+          io.getIO().emit("students", {
+            action: "create",
+            post: result, // УБРАТЬ ПАРОЛЬ У ПОЛЬЗОВАТЕЛЯ ИЗ РЕЗУЛЬТАТА
+          });
           return res.json(result);
         })
 

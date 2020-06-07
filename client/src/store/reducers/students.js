@@ -69,7 +69,7 @@ const studentsStore = (state = initStore, action) => {
     case actions.ADD_STUDENT_SUCCESS:
       return {
         ...state,
-        students: state.students.concat(action.newstudent),
+        students: [action.newstudent].concat(state.students),
         loading: false,
         closeModal: false,
         error: false,
