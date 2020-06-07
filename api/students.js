@@ -50,7 +50,7 @@ api.post("/search", (req, res) => {
   //NEW Query Search
   const q = req.body.q;
   Student.find({ $text: { $search: q.query } })
-    .limit(10)
+    .limit(15)
     .exec(function (err, result) {
       if (err) return res.send({ finded: null });
       console.log(result);

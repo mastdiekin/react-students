@@ -45,6 +45,34 @@ class Search extends Component {
     this.props.onInitStudentInside(id);
   };
 
+  renderData = (data) => {
+    let foundedStart = "Найдено: ";
+    let foundedEnd = " студентов";
+    let founded = <strong>{data.length}</strong>;
+
+    if (data.length === 0) {
+      foundedStart = null;
+      foundedEnd = null;
+      founded = "Не найдено";
+    }
+    return (
+      <Aux>
+        <div
+          className={classes.Search__overlay}
+          onClick={this.clearSearchInput}
+        ></div>
+        <div className={classes["Search__result-wrapper"]}>
+          <div className={classes.Search__found}>
+            {foundedStart}
+            {founded}
+            {foundedEnd}
+          </div>
+          {data}
+        </div>
+      </Aux>
+    );
+  };
+
   render() {
     let renderSearchData = null;
     if (!this.props.loading) {
@@ -86,20 +114,8 @@ class Search extends Component {
           placeholder="Поиск..."
           onChange={(e) => this.changeSearch(e)}
         />
-        {renderSearchData && renderSearchData.length > 0 ? (
-          <Aux>
-            <div
-              className={classes.Search__overlay}
-              onClick={this.clearSearchInput}
-            ></div>
-            <div className={classes["Search__result-wrapper"]}>
-              <div className={classes.Search__found}>
-                Найдено: <strong>{renderSearchData.length}</strong> студентов
-              </div>
-              {renderSearchData}
-            </div>
-          </Aux>
-        ) : null}
+        {/* {renderSearchData && renderSearchData.length > 0 ? ( */}
+        {renderSearchData ? this.renderData(renderSearchData) : null}
       </div>
     );
   }
