@@ -52,6 +52,9 @@ class Search extends Component {
       if (receivedData) {
         renderSearchData = [];
         receivedData.map((item) => {
+          let style = {
+            backgroundImage: "url(" + item.photo + ")",
+          };
           renderSearchData.push(
             <Link
               key={item._id}
@@ -59,7 +62,15 @@ class Search extends Component {
               className={classes.Search__result}
               onClick={() => this.searchLinkClick(item._id)}
             >
-              {item.name} {item.lName}
+              <div className={classes.Search__info}>
+                <div className={classes.Search__names}>
+                  {item.name} {item.lName}
+                </div>
+                <span className={classes.Search__dateReceipt}>
+                  Дата поступления: {item.dateReceipt}
+                </span>
+              </div>
+              <span className={classes.Search__thumb} style={style}></span>
             </Link>
           );
         });
@@ -82,6 +93,9 @@ class Search extends Component {
               onClick={this.clearSearchInput}
             ></div>
             <div className={classes["Search__result-wrapper"]}>
+              <div className={classes.Search__found}>
+                Найдено: <strong>{renderSearchData.length}</strong> студентов
+              </div>
               {renderSearchData}
             </div>
           </Aux>

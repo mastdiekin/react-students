@@ -15,6 +15,7 @@ export const searchChange = (query) => {
     axios
       .post(api + "/students/search", body, axiosDataConfig)
       .then((response) => {
+        console.log(response);
         dispatch(searchChangeSuccess(response.data.finded));
       })
       .catch((err) => {

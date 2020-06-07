@@ -50,6 +50,8 @@ const Student = new Schema({
   },
 });
 
+Student.index({ "$**": "text" });
+
 Student.plugin(AutoIncrement, { inc_field: "id" });
 
 module.exports = mongoose.model("Student", Student);

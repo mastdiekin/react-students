@@ -38,15 +38,24 @@ api.post("/", (req, res) => {
 });
 
 api.post("/search", (req, res) => {
+  //OLD search by LastName
+  // const q = req.body.q;
+  // Student.find({ lName: q.query })
+  //   .then((result) => {
+  //     console.log(result);
+  //     return res.send({ finded: result });
+  //   })
+  //   .catch((err) => res.send({ finded: null }));
+
+  //NEW Query Search
   const q = req.body.q;
-  // if (q.query !== "") {
-  Student.find({ lName: q.query })
-    .then((result) => {
+  Student.find({ $text: { $search: q.query } })
+    .limit(10)
+    .exec(function (err, result) {
+      if (err) return res.send({ finded: null });
       console.log(result);
       return res.send({ finded: result });
-    })
-    .catch((err) => res.send({ finded: null }));
-  // }
+    });
 });
 
 //GET Student by ID
