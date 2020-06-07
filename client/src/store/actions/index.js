@@ -29,4 +29,5 @@ export {
   searchChangeStart,
   searchChangeSuccess,
   searchChangeError,
+  searchClear,
 } from "../actions/search";

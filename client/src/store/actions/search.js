@@ -45,3 +45,9 @@ export const searchChangeError = (error, errorMessage) => {
     errorMessage,
   };
 };
+
+export const searchClear = () => {
+  return {
+    type: actionTypes.SEARCH_CLEAR,
+  };
+};

@@ -9,11 +9,15 @@ class Search extends Component {
   state = {
     data: null,
     query: null,
+    value: "",
   };
 
   changeSearch = (e) => {
     this.props.onSearchChange({ [e.target.name]: e.target.value });
-    this.setState({ query: { [e.target.name]: e.target.value } });
+    this.setState({
+      query: { [e.target.name]: e.target.value },
+      value: e.target.value,
+    });
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -23,26 +27,25 @@ class Search extends Component {
     );
   }
 
-  //   componentWillReceiveProps(nextState, nextProps) {
-  //     this.setState({ data: this.props.search.data });
-  //     // if (nextState.search.data) {
-  //     //   console.log(nextState.search.data);
-  //     // }
-  //   }
-
   componentDidUpdate = () => {
-    this.setState({ data: this.props.search.data });
-    // if (!this.props.loading) {
-    //   const receivedData = this.props.search.data;
-    //   if (receivedData) {
-    //     console.log(nextState);
-    //   }
-    // }
+    this.setState({
+      ...this.state,
+      data: this.props.search.data,
+    });
   };
 
   clearSearchInput = () => {
-    console.log("CLEAR");
-    this.setState({ data: null });
+    this.props.onSearchClear();
+    this.setState({
+      data: null,
+      query: null,
+      value: "",
+    });
+  };
+
+  searchLinkClick = (id) => {
+    this.clearSearchInput();
+    this.props.onInitStudentInside(id);
   };
 
   render() {
@@ -50,11 +53,12 @@ class Search extends Component {
     if (!this.props.loading) {
       let receivedData = this.state.data;
       if (receivedData) {
-        let mapData = receivedData.map((item) => {
+        receivedData.map((item) => {
           renderSearchData = (
             <Link
               to={`/students/${item._id}`}
               className={classes.Search__result}
+              onClick={() => this.searchLinkClick(item._id)}
             >
               {item.name} {item.lName}
             </Link>
@@ -68,6 +72,7 @@ class Search extends Component {
         <input
           type="text"
           name="query"
+          value={this.state.value}
           onChange={(e) => this.changeSearch(e)}
         />
         {renderSearchData ? (
@@ -96,6 +101,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onSearchChange: (query) => dispatch(actions.searchChange(query)),
+    onSearchClear: () => dispatch(actions.searchClear()),
+    onInitStudentInside: (id) => dispatch(actions.initStudentInside(id)),
   };
 };
 

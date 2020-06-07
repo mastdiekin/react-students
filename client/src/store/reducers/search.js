@@ -23,6 +23,7 @@ const searchStore = (state = initStore, action) => {
         error: false,
         errorMessage: null,
       };
+
     case actions.SEARCH_ERROR:
       return {
         ...state,
@@ -30,6 +31,14 @@ const searchStore = (state = initStore, action) => {
         closeModal: false,
         error: true,
         errorMessage: action.errorMessage,
+      };
+    case actions.SEARCH_CLEAR:
+      return {
+        ...state,
+        data: null,
+        loading: false,
+        error: false,
+        errorMessage: null,
       };
     default:
       return state;
