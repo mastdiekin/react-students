@@ -17,9 +17,7 @@ const Menu = (props) => {
   if (props.users.user !== null) {
     isLoggedinCanUseThis = (
       <Aux>
-        <li>
-          <AddNewStudent />
-        </li>
+        <AddNewStudent />
         <li>
           <AuthIcon />
         </li>

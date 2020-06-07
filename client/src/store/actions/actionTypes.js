@@ -36,3 +36,8 @@ export const CLEAR_ERROR = "CLEAR_ERROR";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 
 export const AUTH_ERROR = "AUTH_ERROR";
+
+/* SEARCH */
+export const SEARCH_START = "SEARCH_START";
+export const SEARCH_SUCCESS = "SEARCH_SUCCESS";
+export const SEARCH_ERROR = "SEARCH_ERROR";

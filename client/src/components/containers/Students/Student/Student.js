@@ -35,16 +35,25 @@ class Student extends Component {
   render() {
     let typeClass = classes.Student__info;
 
-    let buttons = this.props.isAuth ? (
-      <div className={classes.Student__buttons}>
-        <EditStudent id={this.props.data.id} />
-        <button
-          id={classes.detete}
-          title="Удалить"
-          onClick={() => this.props.onDelete(this.props.data.id)}
-        ></button>
-      </div>
-    ) : null;
+    // if (this.props.users.user) {
+    //   console.log(this.props.users.user.user.role.caps);
+    // }
+
+    let buttons =
+      this.props.users.user && this.props.isAuth ? (
+        <div className={classes.Student__buttons}>
+          {this.props.users.user.user.role.caps.canEdit ? (
+            <EditStudent id={this.props.data.id} />
+          ) : null}
+          {this.props.users.user.user.role.caps.canDelete ? (
+            <button
+              id={classes.detete}
+              title="Удалить"
+              onClick={() => this.props.onDelete(this.props.data.id)}
+            ></button>
+          ) : null}
+        </div>
+      ) : null;
 
     let expand = this.state.isOpened ? (
       <Link to={`/students/${this.props.data._id}`}>
@@ -155,6 +164,7 @@ class Student extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    users: state.users,
     students: state.students.students,
     loading: state.students.loading,
     sortParams: state.students.sortParams,

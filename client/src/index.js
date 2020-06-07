@@ -11,6 +11,7 @@ import thunk from "redux-thunk";
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import studentsStore from "./store/reducers/students";
 import usersStore from "./store/reducers/users";
+import searchStore from "./store/reducers/search";
 import { createLogger } from "redux-logger";
 
 const composeEnhancers =
@@ -21,6 +22,7 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   students: studentsStore,
   users: usersStore,
+  search: searchStore,
 });
 
 const logger = createLogger({

@@ -1,0 +1,32 @@
+@import '../../../assets/sass/helpers/_mixins'
+@import '../../../assets/sass/src/_color'
+@import '../../../assets/sass/src/_vars'
+
+.Search
+    margin-left: 15px
+    position: relative
+    z-index: 9999
+    input
+        margin: 0
+        line-height: 28px
+        border: 0
+    &__result
+        color: $b !important
+        display: block
+        padding: 15px
+        &:hover
+            color: $main !important
+        &-wrapper
+            top: 35px
+            position: absolute
+            background: $w
+            min-width: 250px
+            box-shadow: 0 0 20px 20px rgba($b, .05)
+    &__overlay
+        position: fixed
+        top: 0
+        left: 0 
+        right: 0
+        bottom: 0
+        background: rgba($b, .5)
+        z-index: -1

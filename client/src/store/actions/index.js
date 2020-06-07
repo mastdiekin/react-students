@@ -23,3 +23,10 @@ export {
   logout,
   clearUsersError,
 } from "../actions/users";
+
+export {
+  searchChange,
+  searchChangeStart,
+  searchChangeSuccess,
+  searchChangeError,
+} from "../actions/search";

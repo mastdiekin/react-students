@@ -8,6 +8,7 @@ import { checkValid } from "../../hoc/shared/utility";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 import { studentState } from "../Auth/utility/auth";
+import aux from "../../hoc/Auxx/Auxx";
 
 class AddNewStudent extends Component {
   toggle = (e) => {
@@ -112,9 +113,13 @@ class AddNewStudent extends Component {
 
     return (
       <Aux>
-        <a href="#" onClick={(event) => this.toggle(event)}>
-          Добавить
-        </a>
+        {this.props.users.role.caps.canAdd ? (
+          <li>
+            <a href="#" onClick={(event) => this.toggle(event)}>
+              Добавить
+            </a>
+          </li>
+        ) : null}
         {isShowModal}
       </Aux>
     );
@@ -123,6 +128,7 @@ class AddNewStudent extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    users: state.users.user.user,
     students: state.students.students,
     loading: state.students.loading,
     closeModal: state.students.closeModal,

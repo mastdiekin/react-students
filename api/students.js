@@ -37,6 +37,18 @@ api.post("/", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+api.post("/search", (req, res) => {
+  const q = req.body.q;
+  // if (q.query !== "") {
+  Student.find({ lName: q.query })
+    .then((result) => {
+      console.log(result);
+      return res.send({ finded: result });
+    })
+    .catch((err) => res.send({ finded: null }));
+  // }
+});
+
 //GET Student by ID
 api.get("/:id", (req, res) => {
   const id = req.params.id;
