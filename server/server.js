@@ -1,8 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const studentsApi = require("./api/students");
-const usersApi = require("./api/users");
 const cors = require("cors");
+const routes = require("./routes/api");
 const path = require("path");
 const config = require("config");
 const Role = require("./models/Role");
@@ -20,10 +19,8 @@ const app = express();
 
 //middleware
 app.use(express.json());
-
 app.use(cors());
-app.use("/api/students", studentsApi);
-app.use("/api/users", usersApi);
+app.use(routes);
 
 //db
 mongoose
@@ -79,8 +76,6 @@ const server = app.listen(port, () =>
 );
 
 const io = require("./socket").init(server);
-let clients = 0;
 io.on("connection", (socket) => {
-  clients++;
-  console.log("Socket client connected", "All clients: " + clients);
+  console.log("Socket client connected.", "id: " + socket.id);
 });
