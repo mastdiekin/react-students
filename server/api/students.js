@@ -9,9 +9,7 @@ const ITEMS_PER_PAGE = 10;
 
 //POST Students
 api.post("/", (req, res) => {
-  // console.log("Current page", req.body.page);
   const page = +req.body.page || 1;
-
   let totalItems;
 
   Student.find()

@@ -5,6 +5,7 @@ const routes = require("./routes/api");
 const path = require("path");
 const config = require("config");
 const Role = require("./models/Role");
+const bodyParser = require("body-parser");
 
 // need add config file in /config/default.json
 // {
@@ -18,9 +19,11 @@ const db = config.get("mongoURI");
 const app = express();
 
 //middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use(routes);
+app.use("/uploads", express.static("uploads"));
 
 //db
 mongoose
@@ -28,6 +31,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    useFindAndModify: false,
   })
   .then(() => console.log("MongoDB Connected..."))
   .then(() => {
@@ -50,7 +54,9 @@ mongoose
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    res.sendFile(
+      path.resolve(__dirname, "..", "client", "build", "index.html")
+    );
   });
 }
 
