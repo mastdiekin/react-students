@@ -6,6 +6,7 @@ const path = require("path");
 const config = require("config");
 const Role = require("./models/Role");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
 
 // need add config file in /config/default.json
 // {
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(cors());
 app.use(routes);
 app.use("/uploads", express.static("uploads"));
+// app.use(helmet());
 
 //db
 mongoose
@@ -34,21 +36,21 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => console.log("MongoDB Connected..."))
-  .then(() => {
-    Role.findOne({ type: "administrator" }).then((role) => {
-      if (!role) {
-        const role = new Role({
-          type: "administrator",
-          caps: {
-            canEdit: true,
-            canAdd: true,
-            canDelete: true,
-          },
-        });
-        role.save();
-      }
-    });
-  })
+  // .then(() => {
+  //   Role.findOne({ type: "administrator" }).then((role) => {
+  //     if (!role) {
+  //       const role = new Role({
+  //         type: "administrator",
+  //         caps: {
+  //           canEdit: true,
+  //           canAdd: true,
+  //           canDelete: true,
+  //         },
+  //       });
+  //       role.save();
+  //     }
+  //   });
+  // })
   .catch((err) => console.log(err));
 
 if (process.env.NODE_ENV === "production") {
