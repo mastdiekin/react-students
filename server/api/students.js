@@ -50,6 +50,7 @@ api.post("/search", (req, res) => {
   const q = req.body.q;
   Student.find({ $text: { $search: q.query } })
     .limit(15)
+    .select("name lName dateReceipt photo -_id")
     .exec(function (err, result) {
       if (err) return res.send({ finded: null });
       console.log(result);

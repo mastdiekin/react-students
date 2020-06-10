@@ -50,7 +50,8 @@ const Student = new Schema({
   },
 });
 
-Student.index({ "$**": "text" });
+// Student.index({ "$**": "text" });
+Student.index({ name: "text", lName: "text" });
 
 Student.plugin(AutoIncrement, { inc_field: "id" });
 
