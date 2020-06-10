@@ -7,7 +7,7 @@ const Role = require("./models/Role");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const _u = require("./util/utility");
-const graphQL = require("express-graphql");
+// const graphQL = require("express-graphql");
 
 //nodemon.json
 // {
@@ -34,13 +34,13 @@ app.use(cors());
 app.use(routes);
 app.use("/uploads", express.static("uploads"));
 app.use(helmet());
-app.use(
-  "/graphql",
-  graphQL({
-    schema: require("./graphql/schema"),
-    rootValue: require("./graphql/resolvers"),
-  })
-);
+// app.use(
+//   "/graphql",
+//   graphQL({
+//     schema: require("./graphql/schema"),
+//     rootValue: require("./graphql/resolvers"),
+//   })
+// );
 
 //db
 mongoose
