@@ -6,7 +6,7 @@ const path = require("path");
 const Role = require("./models/Role");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
-const chalk = require("chalk");
+const _u = require("./util/utility");
 
 //nodemon.json
 // {
@@ -19,15 +19,10 @@ const chalk = require("chalk");
 //   }
 // }
 
-console.log("Current environment", chalk.bgGreen(process.env.NODE_ENV));
-
+_u.colenv();
 //db
-let db =
-  process.env.NODE_ENV === "production"
-    ? `mongodb+srv://${process.env.MONGO_ADMIN}:${process.env.MONGO_PASSWORD}@students-hfnmg.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`
-    : "mongodb://localhost/students";
-
-console.log("Using", chalk.bgGreen(db));
+const db = _u.db();
+_u.coldb(db);
 
 const app = express();
 
@@ -37,7 +32,7 @@ app.use(express.json());
 app.use(cors());
 app.use(routes);
 app.use("/uploads", express.static("uploads"));
-// app.use(helmet());
+app.use(helmet());
 
 //db
 mongoose
@@ -63,7 +58,7 @@ mongoose
   //     }
   //   });
   // })
-  .catch((err) => console.log(err));
+  .catch((err) => console.error(err));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -80,7 +75,7 @@ app.use((req, res, next) => {
       req.role = role;
       next();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.error(err));
   // User.findById("5ed16833e7fc0f59639d9ac9")
   //   .then((user) => {
   //     req.user = user;
