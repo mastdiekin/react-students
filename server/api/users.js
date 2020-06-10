@@ -3,7 +3,6 @@ const api = express.Router();
 const User = require("../models/User");
 const Role = require("../models/Role");
 const bcrypt = require("bcryptjs");
-const config = require("config");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const mongoose = require("mongoose");
@@ -70,7 +69,7 @@ api.post("/register", (req, res) => {
             .then((user) => {
               jwt.sign(
                 { id: user._id },
-                config.get("jwtSecret"),
+                process.env.JWT_SECRET,
                 {
                   expiresIn: 604800,
                 },
@@ -141,7 +140,7 @@ api.post("/login", (req, res) => {
 
           jwt.sign(
             { id: user._id },
-            config.get("jwtSecret"),
+            process.env.JWT_SECRET,
             {
               expiresIn: 604800,
             },

@@ -1,4 +1,7 @@
-export const api = "http://localhost:5000/api";
+export const api =
+  process.env.NODE_ENV === "production"
+    ? "https://intense-thicket-23043.herokuapp.com/api"
+    : "http://localhost:5000/api";
 
 export const checkValid = (value, rules) => {
   let isValid = true;

@@ -3,19 +3,31 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const routes = require("./routes/api");
 const path = require("path");
-const config = require("config");
 const Role = require("./models/Role");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
+const chalk = require("chalk");
 
-// need add config file in /config/default.json
+//nodemon.json
 // {
-//   "mongoURI": "YOUR_CONNECT_TO_DATABASE",
-//   "jwtSecret": "YOUR_SECRET"
+//   "env": {
+//     "NODE_ENV": "developement",
+//     "MONGO_ADMIN": "loginname",
+//     "MONGO_PASSWORD": "password",
+//     "MONGO_DBNAME": "dbname",
+//     "JWT_SECRET": "jwt secret phrase"
+//   }
 // }
 
+console.log("Current environment", chalk.bgGreen(process.env.NODE_ENV));
+
 //db
-const db = config.get("mongoURI");
+let db =
+  process.env.NODE_ENV === "production"
+    ? `mongodb+srv://${process.env.MONGO_ADMIN}:${process.env.MONGO_PASSWORD}@students-hfnmg.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`
+    : "mongodb://localhost/students";
+
+console.log("Using", chalk.bgGreen(db));
 
 const app = express();
 

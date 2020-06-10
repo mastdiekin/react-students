@@ -14,10 +14,10 @@ import usersStore from "./store/reducers/users";
 import searchStore from "./store/reducers/search";
 import { createLogger } from "redux-logger";
 
-const composeEnhancers =
-  (process.env.NODE_ENV === "development"
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : null) || compose;
+// const composeEnhancers =
+//   (process.env.NODE_ENV === "development"
+//     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+//     : null) || compose;
 
 const rootReducer = combineReducers({
   students: studentsStore,
@@ -25,15 +25,15 @@ const rootReducer = combineReducers({
   search: searchStore,
 });
 
-const logger = createLogger({
-  // diff: true,
-  duration: true,
-});
+// const logger = createLogger({
+//   // diff: true,
+//   duration: true,
+// });
 
 const store = createStore(
   rootReducer,
-  // applyMiddleware(logger),
-  composeEnhancers(applyMiddleware(thunk, logger))
+  applyMiddleware(thunk)
+  // composeEnhancers(applyMiddleware(thunk, logger))
 );
 
 ReactDOM.render(

@@ -58,7 +58,10 @@ export const startStudents = () => {
 };
 
 export const successStudents = (dispatch, data) => {
-  const socket = openSocket("http://localhost:5000");
+  const socket =
+    process.env.NODE_ENV === "production"
+      ? openSocket("https://intense-thicket-23043.herokuapp.com")
+      : openSocket("http://localhost:5000");
   socket.on("students", (data) => {
     if (data.action === "create") {
       dispatch(newStudentSuccess(data.post));
